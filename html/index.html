@@ -13,7 +13,12 @@
 
   <div v-if="data">
   Total: {{data.total}}
+  <h2>Recent uploads</h2>
+    <div v-for="project in data.recent_projects">
+      <div><a href="https://pypi.org/project/{{project.name}}">{{project.name}}</a> - {{project.pub_date}}</div>
+    </div>
   </div>
+
 
   <div v-if="pypi">
     <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
