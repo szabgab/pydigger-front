@@ -15,9 +15,11 @@
   Total: {{data.total}}
   </div>
 
+  <div v-if="pypi">
+    <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
+    <div>Number of entries in the RSS feed: {{pypi.projects_in_rss}}</div>
+  </div>
 </div>
-</body>
-</html>
 
 
 <script>
@@ -26,20 +28,22 @@
     createApp({
         methods: {
             async get_data() {
-                console.log("fetch data")
-                const url = "/data/report.json"
-                this.data = await (await fetch(url)).json()
-            }        
-        }, 
+                this.data = await (await fetch("/data/report.json")).json()
+                this.pypi = await (await fetch("/data/pypi.json")).json()
+            }
+        },
         beforeMount() {
            this.get_data()
         },
         setup() {
             const data = ref(null)
+            const pypi = ref(null)
             return {
-                data
+                data, pypi
             }
         }
     }).mount('#app')
 </script>
 
+</body>
+</html>
