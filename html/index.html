@@ -15,11 +15,33 @@
   Total: {{data.total}}
   <h2>Recent uploads</h2>
     <div v-for="project in data.recent_projects">
-      <div><a href="https://pypi.org/project/{{project.name}}">{{project.name}}</a> - {{project.pub_date}}</div>
+      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
     </div>
+
+
+  <h2>Licenses</h2>
+  <table>
+    <tr v-for="(count, license) in data.license.licenses"><td>{{license}}</td><td>{{count}}</td></tr> 
+  </table>
+  <hr>
+  <div>No License: {{data.license.no_license_count}}</div>
+  <div>
+    <div v-for="project in data.license.recent_no_license_projects">
+      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
+    </div>    
+  </div>
+
+  <hr>
+  <div>Unrecognized License: {{data.license.bad_license_count}}</div>
+  <div>
+    <div v-for="project in data.license.recent_bad_license_projects">
+      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
+    </div>    
   </div>
 
 
+
+  <hr>
   <div v-if="pypi">
     <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
     <div>Number of entries in the RSS feed: {{pypi.projects_in_rss}}</div>
