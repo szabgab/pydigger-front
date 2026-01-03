@@ -22,14 +22,14 @@
   <hr>
   <h2>Licenses</h2>
   <table>
-    <tr v-for="(count, license) in data.license.licenses"><td>{{license}}</td><td>{{count}}</td></tr> 
+    <tr v-for="(count, license) in data.license.licenses"><td>{{license}}</td><td>{{count}}</td></tr>
   </table>
   <hr>
   <div>No License: {{data.license.no_license_count}}</div>
   <div>
     <div v-for="project in data.license.recent_no_license_projects">
       <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>    
+    </div>
   </div>
 
   <hr>
@@ -37,20 +37,20 @@
   <div>
     <div v-for="project in data.license.recent_bad_license_projects">
       <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>    
+    </div>
   </div>
 
   <hr>
   <h2>VCS</h2>
   <table>
-    <tr v-for="(count, host) in data.vcs.hosts"><td>{{host}}</td><td>{{count}}</td></tr> 
+    <tr v-for="(count, host) in data.vcs.hosts"><td>{{host}}</td><td>{{count}}</td></tr>
   </table>
   <hr>
   <div>No VCS: {{data.vcs.no_vcs_count}}</div>
   <div>
     <div v-for="project in data.vcs.recent_no_vcs_projects">
       <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>    
+    </div>
   </div>
 
   <hr>
@@ -58,7 +58,7 @@
   <div>
     <div v-for="project in data.vcs.recent_bad_vcs_projects">
       <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>    
+    </div>
   </div>
 
 
