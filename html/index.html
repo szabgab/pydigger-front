@@ -14,10 +14,7 @@
   <div v-if="data">
   Total: {{data.total}}
   <h2>Recent uploads</h2>
-    <div v-for="project in data.recent_projects">
-      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>
-
+  <project-list :projects="data.recent_projects"></project-list>
 
   <hr>
   <h2>Licenses</h2>
@@ -26,19 +23,11 @@
   </table>
   <hr>
   <div>No License: {{data.license.no_license_count}}</div>
-  <div>
-    <div v-for="project in data.license.recent_no_license_projects">
-      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>
-  </div>
+  <project-list :projects="data.license.recent_no_license_projects"></project-list>
 
   <hr>
   <div>Unrecognized License: {{data.license.bad_license_count}}</div>
-  <div>
-    <div v-for="project in data.license.recent_bad_license_projects">
-      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>
-  </div>
+  <project-list :projects="data.license.recent_bad_license_projects"></project-list>
 
   <hr>
   <h2>VCS</h2>
@@ -51,12 +40,7 @@
 
   <hr>
   <div>Unrecognized VCS: {{data.vcs.bad_vcs_count}}</div>
-  <div>
-    <div v-for="project in data.vcs.recent_bad_vcs_projects">
-      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</div>
-    </div>
-  </div>
-
+  <project-list :projects="data.vcs.recent_bad_vcs_projects"></project-list>
 
 
   <hr>
