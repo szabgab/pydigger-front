@@ -47,11 +47,7 @@
   </table>
   <hr>
   <div>No VCS: {{data.vcs.no_vcs_count}}</div>
-  <div>
-    <div v-for="project in data.vcs.recent_no_vcs_projects">
-      <div><a v-bind:href="'https://pypi.org/project/' + project.name">{{project.name}} {{project.version}}</a> - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago <a v-bind:href="'https://pypi.org/pypi/' + project.name + '/' + project.version + '/json'">json</a></div>
-    </div>
-  </div>
+  <project-list :projects="data.vcs.recent_no_vcs_projects"></project-list>
 
   <hr>
   <div>Unrecognized VCS: {{data.vcs.bad_vcs_count}}</div>
@@ -74,7 +70,25 @@
 <script>
     const { createApp, ref } = Vue
 
+    const ProjectList = {
+        props: ['projects'],
+        template: `
+            <div>
+                <div v-for="project in projects">
+                    <div>
+                        <a :href="'https://pypi.org/project/' + project.name">{{project.name}} {{project.version}}</a> 
+                        - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago 
+                        <a :href="'https://pypi.org/pypi/' + project.name + '/' + project.version + '/json'">json</a>
+                    </div>
+                </div>
+            </div>
+        `
+    }
+
     createApp({
+        components: {
+            'project-list': ProjectList
+        },
         methods: {
             async get_data() {
                 this.data = await (await fetch("/data/report.json")).json()
