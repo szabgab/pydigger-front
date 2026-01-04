@@ -10,25 +10,25 @@
 <body>
 <div id="app">
   <div class="menu">
-    <a href="#" @click.prevent="currentPage = 'home'" :class="{ active: currentPage === 'home' }">Home</a>
-    <a href="#" @click.prevent="currentPage = 'recent'" :class="{ active: currentPage === 'recent' }">Recent</a>
+    <a href="#home" @click.prevent="setPage('home')" :class="{ active: currentPage === 'home' }">Home</a>
+    <a href="#recent" @click.prevent="setPage('recent')" :class="{ active: currentPage === 'recent' }">Recent</a>
     <div class="dropdown">
       <button class="dropbtn">Licenses</button>
       <div class="dropdown-content">
-        <a href="#" @click.prevent="currentPage = 'licenses'">Licenses</a>
-        <a href="#" @click.prevent="currentPage = 'no-license'">No License</a>
-        <a href="#" @click.prevent="currentPage = 'unrecognized-license'">Unrecognized License</a>
+        <a href="#licenses" @click.prevent="setPage('licenses')">Licenses</a>
+        <a href="#no-license" @click.prevent="setPage('no-license')">No License</a>
+        <a href="#unrecognized-license" @click.prevent="setPage('unrecognized-license')">Unrecognized License</a>
       </div>
     </div>
     <div class="dropdown">
       <button class="dropbtn">VCS</button>
       <div class="dropdown-content">
-        <a href="#" @click.prevent="currentPage = 'vcs'">VCS</a>
-        <a href="#" @click.prevent="currentPage = 'no-vcs'">No VCS</a>
-        <a href="#" @click.prevent="currentPage = 'unrecognized-vcs'">Unrecognized VCS</a>
+        <a href="#vcs" @click.prevent="setPage('vcs')">VCS</a>
+        <a href="#no-vcs" @click.prevent="setPage('no-vcs')">No VCS</a>
+        <a href="#unrecognized-vcs" @click.prevent="setPage('unrecognized-vcs')">Unrecognized VCS</a>
       </div>
     </div>
-    <a href="#" @click.prevent="currentPage = 'about'" :class="{ active: currentPage === 'about' }">About</a>
+    <a href="#about" @click.prevent="setPage('about')" :class="{ active: currentPage === 'about' }">About</a>
   </div>
 
   <h1>PyDigger</h1>
@@ -122,7 +122,23 @@
             async get_data() {
                 this.data = await (await fetch("/data/report.json")).json()
                 this.pypi = await (await fetch("/data/pypi.json")).json()
+            },
+            setPage(page) {
+                this.currentPage = page
+                window.location.hash = page
+            },
+            loadPageFromHash() {
+                const hash = window.location.hash.slice(1)
+                if (hash) {
+                    this.currentPage = hash
+                }
             }
+        },
+        mounted() {
+            this.loadPageFromHash()
+            window.addEventListener('hashchange', () => {
+                this.loadPageFromHash()
+            })
         },
         beforeMount() {
            this.get_data()
