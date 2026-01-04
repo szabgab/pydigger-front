@@ -5,13 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
   <title>PyDiger</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
+  <style>
+    .menu {
+      background-color: #333;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .menu a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .menu a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    .menu a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 <div id="app">
+  <div class="menu">
+    <a href="#" @click.prevent="currentPage = 'home'" :class="{ active: currentPage === 'home' }">Home</a>
+    <a href="#" @click.prevent="currentPage = 'about'" :class="{ active: currentPage === 'about' }">About</a>
+  </div>
+
   <h1>PyDigger</h1>
 
-  <div v-if="data">
+  <div v-if="currentPage === 'about'">
+    <h2>About PyDigger</h2>
+  </div>
+
+  <div v-if="currentPage === 'home' && data">
   Total: {{data.total}}
   <h2>Recent uploads</h2>
   <project-list :projects="data.recent_projects"></project-list>
@@ -90,8 +122,9 @@
         setup() {
             const data = ref(null)
             const pypi = ref(null)
+            const currentPage = ref('home')
             return {
-                data, pypi
+                data, pypi, currentPage
             }
         }
     }).mount('#app')
