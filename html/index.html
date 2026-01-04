@@ -12,7 +12,14 @@
   <div class="menu">
     <a href="#" @click.prevent="currentPage = 'home'" :class="{ active: currentPage === 'home' }">Home</a>
     <a href="#" @click.prevent="currentPage = 'recent'" :class="{ active: currentPage === 'recent' }">Recent</a>
-    <a href="#" @click.prevent="currentPage = 'licenses'" :class="{ active: currentPage === 'licenses' }">Licenses</a>
+    <div class="dropdown">
+      <button class="dropbtn">Licenses</button>
+      <div class="dropdown-content">
+        <a href="#" @click.prevent="currentPage = 'licenses'">Licenses</a>
+        <a href="#" @click.prevent="currentPage = 'no-license'">No License</a>
+        <a href="#" @click.prevent="currentPage = 'unrecognized-license'">Unrecognized License</a>
+      </div>
+    </div>
     <div class="dropdown">
       <button class="dropbtn">VCS</button>
       <div class="dropdown-content">
@@ -40,11 +47,16 @@
   <table>
     <tr v-for="(count, license) in data.license.licenses"><td>{{license}}</td><td>{{count}}</td></tr>
   </table>
-  <hr>
+  </div>
+
+  <div v-if="currentPage === 'no-license' && data">
+  <h2>No License</h2>
   <div>No License: {{data.license.no_license_count}}</div>
   <project-list :projects="data.license.recent_no_license_projects"></project-list>
+  </div>
 
-  <hr>
+  <div v-if="currentPage === 'unrecognized-license' && data">
+  <h2>Unrecognized License</h2>
   <div>Unrecognized License: {{data.license.bad_license_count}}</div>
   <project-list :projects="data.license.recent_bad_license_projects"></project-list>
   </div>
