@@ -11,6 +11,7 @@
 <div id="app">
   <div class="menu">
     <a href="#" @click.prevent="currentPage = 'home'" :class="{ active: currentPage === 'home' }">Home</a>
+    <a href="#" @click.prevent="currentPage = 'recent'" :class="{ active: currentPage === 'recent' }">Recent</a>
     <a href="#" @click.prevent="currentPage = 'about'" :class="{ active: currentPage === 'about' }">About</a>
   </div>
 
@@ -20,11 +21,13 @@
     <h2>About PyDigger</h2>
   </div>
 
+  <div v-if="currentPage === 'recent' && data">
+    <h2>Recent uploads</h2>
+    <project-list :projects="data.recent_projects"></project-list>
+  </div>
+
   <div v-if="currentPage === 'home' && data">
   Total: {{data.total}}
-  <h2>Recent uploads</h2>
-  <project-list :projects="data.recent_projects"></project-list>
-
   <hr>
   <h2>Licenses</h2>
   <table>
