@@ -12,6 +12,7 @@
   <div class="menu">
     <a href="#" @click.prevent="currentPage = 'home'" :class="{ active: currentPage === 'home' }">Home</a>
     <a href="#" @click.prevent="currentPage = 'recent'" :class="{ active: currentPage === 'recent' }">Recent</a>
+    <a href="#" @click.prevent="currentPage = 'licenses'" :class="{ active: currentPage === 'licenses' }">Licenses</a>
     <a href="#" @click.prevent="currentPage = 'about'" :class="{ active: currentPage === 'about' }">About</a>
   </div>
 
@@ -26,9 +27,7 @@
     <project-list :projects="data.recent_projects"></project-list>
   </div>
 
-  <div v-if="currentPage === 'home' && data">
-  Total: {{data.total}}
-  <hr>
+  <div v-if="currentPage === 'licenses' && data">
   <h2>Licenses</h2>
   <table>
     <tr v-for="(count, license) in data.license.licenses"><td>{{license}}</td><td>{{count}}</td></tr>
@@ -40,7 +39,10 @@
   <hr>
   <div>Unrecognized License: {{data.license.bad_license_count}}</div>
   <project-list :projects="data.license.recent_bad_license_projects"></project-list>
+  </div>
 
+  <div v-if="currentPage === 'home' && data">
+  Total: {{data.total}}
   <hr>
   <h2>VCS</h2>
   <table>
