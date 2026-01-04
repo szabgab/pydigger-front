@@ -84,6 +84,25 @@
   Total: {{data.total}}
   </div>
 
+  <div v-if="currentPage.startsWith('pypi/') && projectData">
+    <h2>{{projectData.name}} {{projectData.version}}</h2>
+    <div v-if="projectData.license"><strong>License:</strong> {{projectData.license}}</div>
+    <div v-if="projectData.home_page"><strong>Home page:</strong> <a :href="projectData.home_page">{{projectData.home_page}}</a></div>
+    <div v-if="projectData.summary"><strong>Summary:</strong> {{projectData.summary}}</div>
+    <div><strong>Published:</strong> {{new Date(projectData.pub_date*1000)}}</div>
+    <div><a :href="'https://pypi.org/project/' + projectData.name">View on PyPI</a></div>
+    <div><a :href="'https://pypi.org/pypi/' + projectData.name + '/' + projectData.version + '/json'">JSON</a></div>
+  </div>
+
+  <div v-if="currentPage.startsWith('pypi/') && !projectData && !projectError">
+    <div>Loading...</div>
+  </div>
+
+  <div v-if="currentPage.startsWith('pypi/') && projectError">
+    <h2>Project not found</h2>
+    <div>{{projectError}}</div>
+  </div>
+
   <div class="footer" v-if="pypi">
     <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
     <div>Number of entries in the RSS feed: {{pypi.projects_in_rss}}</div>
@@ -105,7 +124,7 @@
             <div>
                 <div v-for="project in projects">
                     <div>
-                        <a :href="'https://pypi.org/project/' + project.name">{{project.name}} {{project.version}}</a> 
+                        <a :href="'#pypi/' + project.name">{{project.name}} {{project.version}}</a> 
                         - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago 
                         <a :href="'https://pypi.org/pypi/' + project.name + '/' + project.version + '/json'">json</a>
                     </div>
@@ -123,6 +142,20 @@
                 this.data = await (await fetch("/data/report.json")).json()
                 this.pypi = await (await fetch("/data/pypi.json")).json()
             },
+            async loadProject(projectName) {
+                this.projectData = null
+                this.projectError = null
+                try {
+                    const prefix = projectName.substring(0, 2).toLowerCase()
+                    const response = await fetch(`/data/pypi/${prefix}/${projectName}.json`)
+                    if (!response.ok) {
+                        throw new Error(`Project ${projectName} not found`)
+                    }
+                    this.projectData = await response.json()
+                } catch (error) {
+                    this.projectError = error.message
+                }
+            },
             setPage(page) {
                 this.currentPage = page
                 window.location.hash = page
@@ -131,6 +164,10 @@
                 const hash = window.location.hash.slice(1)
                 if (hash) {
                     this.currentPage = hash
+                    if (hash.startsWith('pypi/')) {
+                        const projectName = hash.substring(5)
+                        this.loadProject(projectName)
+                    }
                 }
             }
         },
@@ -147,8 +184,10 @@
             const data = ref(null)
             const pypi = ref(null)
             const currentPage = ref('home')
+            const projectData = ref(null)
+            const projectError = ref(null)
             return {
-                data, pypi, currentPage
+                data, pypi, currentPage, projectData, projectError
             }
         }
     }).mount('#app')
