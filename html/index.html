@@ -4,114 +4,153 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
   <title>PyDiger</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div id="app">
-  <div class="menu">
-    <a href="#home" @click.prevent="setPage('home')" :class="{ active: currentPage === 'home' }">Home</a>
-    <a href="#recent" @click.prevent="setPage('recent')" :class="{ active: currentPage === 'recent' }">Recent</a>
-    <div class="dropdown">
-      <button class="dropbtn">Licenses</button>
-      <div class="dropdown-content">
-        <a href="#licenses" @click.prevent="setPage('licenses')">Licenses</a>
-        <a href="#no-license" @click.prevent="setPage('no-license')">No License</a>
-        <a href="#unrecognized-license" @click.prevent="setPage('unrecognized-license')">Unrecognized License</a>
+<body class="bg-gray-50">
+<div id="app" class="min-h-screen flex flex-col">
+  <nav class="bg-indigo-600 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex space-x-4">
+          <a href="#home" @click.prevent="setPage('home')" :class="currentPage === 'home' ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">Home</a>
+          <a href="#recent" @click.prevent="setPage('recent')" :class="currentPage === 'recent' ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">Recent</a>
+          
+          <div class="relative group">
+            <button class="inline-flex items-center px-4 h-full border-b-2 border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white text-sm font-medium transition-colors">
+              Licenses
+              <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </button>
+            <div class="absolute left-0 mt-0 w-56 bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="#licenses" @click.prevent="setPage('licenses')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Licenses</a>
+              <a href="#no-license" @click.prevent="setPage('no-license')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">No License</a>
+              <a href="#unrecognized-license" @click.prevent="setPage('unrecognized-license')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Unrecognized License</a>
+            </div>
+          </div>
+          
+          <div class="relative group">
+            <button class="inline-flex items-center px-4 h-full border-b-2 border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white text-sm font-medium transition-colors">
+              VCS
+              <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </button>
+            <div class="absolute left-0 mt-0 w-56 bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="#vcs" @click.prevent="setPage('vcs')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">VCS</a>
+              <a href="#no-vcs" @click.prevent="setPage('no-vcs')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">No VCS</a>
+              <a href="#unrecognized-vcs" @click.prevent="setPage('unrecognized-vcs')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Unrecognized VCS</a>
+            </div>
+          </div>
+          
+          <a href="#about" @click.prevent="setPage('about')" :class="currentPage === 'about' ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">About</a>
+        </div>
       </div>
     </div>
-    <div class="dropdown">
-      <button class="dropbtn">VCS</button>
-      <div class="dropdown-content">
-        <a href="#vcs" @click.prevent="setPage('vcs')">VCS</a>
-        <a href="#no-vcs" @click.prevent="setPage('no-vcs')">No VCS</a>
-        <a href="#unrecognized-vcs" @click.prevent="setPage('unrecognized-vcs')">Unrecognized VCS</a>
-      </div>
-    </div>
-    <a href="#about" @click.prevent="setPage('about')" :class="{ active: currentPage === 'about' }">About</a>
-  </div>
+  </nav>
 
-  <h1>PyDigger</h1>
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-8">PyDigger</h1>
 
-  <div v-if="currentPage === 'about'">
-    <h2>About PyDigger</h2>
+  <div v-if="currentPage === 'about'" class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">About PyDigger</h2>
   </div>
 
   <div v-if="currentPage === 'recent' && data">
-    <h2>Recent uploads</h2>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-6">Recent uploads</h2>
     <project-list :projects="data.recent_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'licenses' && data">
-  <h2>Licenses</h2>
-  <table>
-    <tr v-for="(count, license) in data.license.licenses"><td>{{license}}</td><td>{{count}}</td></tr>
-  </table>
+  <h2 class="text-2xl font-semibold text-gray-900 mb-6">Licenses</h2>
+  <div class="bg-white shadow rounded-lg overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200">
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr v-for="(count, license) in data.license.licenses" class="hover:bg-gray-50">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{license}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{count}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   </div>
 
   <div v-if="currentPage === 'no-license' && data">
-  <h2>No License</h2>
-  <div>No License: {{data.license.no_license_count}}</div>
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">No License</h2>
+  <div class="mb-6 text-gray-700">No License: <span class="font-semibold">{{data.license.no_license_count}}</span></div>
   <project-list :projects="data.license.recent_no_license_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'unrecognized-license' && data">
-  <h2>Unrecognized License</h2>
-  <div>Unrecognized License: {{data.license.bad_license_count}}</div>
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Unrecognized License</h2>
+  <div class="mb-6 text-gray-700">Unrecognized License: <span class="font-semibold">{{data.license.bad_license_count}}</span></div>
   <project-list :projects="data.license.recent_bad_license_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'vcs' && data">
-  <h2>VCS</h2>
-  <table>
-    <tr v-for="(count, host) in data.vcs.hosts"><td>{{host}}</td><td>{{count}}</td></tr>
-  </table>
+  <h2 class="text-2xl font-semibold text-gray-900 mb-6">VCS</h2>
+  <div class="bg-white shadow rounded-lg overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200">
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr v-for="(count, host) in data.vcs.hosts" class="hover:bg-gray-50">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{host}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{count}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   </div>
 
   <div v-if="currentPage === 'no-vcs' && data">
-  <h2>No VCS</h2>
-  <div>No VCS: {{data.vcs.no_vcs_count}}</div>
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">No VCS</h2>
+  <div class="mb-6 text-gray-700">No VCS: <span class="font-semibold">{{data.vcs.no_vcs_count}}</span></div>
   <project-list :projects="data.vcs.recent_no_vcs_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'unrecognized-vcs' && data">
-  <h2>Unrecognized VCS</h2>
-  <div>Unrecognized VCS: {{data.vcs.bad_vcs_count}}</div>
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Unrecognized VCS</h2>
+  <div class="mb-6 text-gray-700">Unrecognized VCS: <span class="font-semibold">{{data.vcs.bad_vcs_count}}</span></div>
   <project-list :projects="data.vcs.recent_bad_vcs_projects"></project-list>
   </div>
 
-  <div v-if="currentPage === 'home' && data">
-  Total: {{data.total}}
+  <div v-if="currentPage === 'home' && data" class="bg-white shadow rounded-lg p-6">
+  <div class="text-lg">Total: <span class="font-bold text-indigo-600">{{data.total}}</span></div>
   </div>
 
-  <div v-if="currentPage.startsWith('pypi/') && projectData">
-    <h2>{{projectData.name}} {{projectData.version}}</h2>
-    <div v-if="projectData.license"><strong>License:</strong> {{projectData.license}}</div>
-    <div v-if="projectData.home_page"><strong>Home page:</strong> <a :href="projectData.home_page">{{projectData.home_page}}</a></div>
-    <div v-if="projectData.summary"><strong>Summary:</strong> {{projectData.summary}}</div>
-    <div><strong>Published:</strong> {{new Date(projectData.pub_date*1000)}}</div>
-    <div><a :href="'https://pypi.org/project/' + projectData.name">View on PyPI</a></div>
-    <div><a :href="'https://pypi.org/pypi/' + projectData.name + '/' + projectData.version + '/json'">JSON</a></div>
-  </div>
-
-  <div v-if="currentPage.startsWith('pypi/') && !projectData && !projectError">
-    <div>Loading...</div>
-  </div>
-
-  <div v-if="currentPage.startsWith('pypi/') && projectError">
-    <h2>Project not found</h2>
-    <div>{{projectError}}</div>
-  </div>
-
-  <div class="footer" v-if="pypi">
-    <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
-    <div>Number of entries in the RSS feed: {{pypi.projects_in_rss}}</div>
-    <div>Source:
-        <a href="https://github.com/szabgab/pydigger.rs">backend</a> |
-        <a href="https://github.com/szabgab/pydigger-front">frontend</a> |
-        <a href="https://github.com/szabgab/pydigger-data">data</a>
+  <div v-if="currentPage.startsWith('pypi/') && projectData" class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">{{projectData.name}} <span class="text-xl text-gray-500">{{projectData.version}}</span></h2>
+    <div class="space-y-3">
+      <div v-if="projectData.license" class="text-gray-700"><span class="font-semibold">License:</span> {{projectData.license}}</div>
+      <div v-if="projectData.home_page" class="text-gray-700"><span class="font-semibold">Home page:</span> <a :href="projectData.home_page" class="text-indigo-600 hover:text-indigo-800 underline">{{projectData.home_page}}</a></div>
+      <div v-if="projectData.summary" class="text-gray-700"><span class="font-semibold">Summary:</span> {{projectData.summary}}</div>
+      <div class="text-gray-700"><span class="font-semibold">Published:</span> {{new Date(projectData.pub_date*1000)}}</div>
+      <div class="flex gap-4 mt-4">
+        <a :href="'https://pypi.org/project/' + projectData.name" class="text-indigo-600 hover:text-indigo-800 underline">View on PyPI</a>
+        <a :href="'https://pypi.org/pypi/' + projectData.name + '/' + projectData.version + '/json'" class="text-indigo-600 hover:text-indigo-800 underline">JSON</a>
+      </div>
     </div>
   </div>
+
+  <div v-if="currentPage.startsWith('pypi/') && !projectData && !projectError" class="flex justify-center items-center py-12">
+    <div class="text-gray-500 text-lg">Loading...</div>
+  </div>
+
+  <div v-if="currentPage.startsWith('pypi/') && projectError" class="bg-red-50 border border-red-200 rounded-lg p-6">
+    <h2 class="text-2xl font-semibold text-red-800 mb-2">Project not found</h2>
+    <div class="text-red-600">{{projectError}}</div>
+  </div>
+  </main>
+
+  <footer class="bg-white border-t border-gray-200 mt-auto" v-if="pypi">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="text-sm text-gray-600 space-y-2">
+        <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
+        <div>Number of entries in the RSS feed: {{pypi.projects_in_rss}}</div>
+        <div>Source:
+          <a href="https://github.com/szabgab/pydigger.rs" class="text-indigo-600 hover:text-indigo-800 underline">backend</a> |
+          <a href="https://github.com/szabgab/pydigger-front" class="text-indigo-600 hover:text-indigo-800 underline">frontend</a> |
+          <a href="https://github.com/szabgab/pydigger-data" class="text-indigo-600 hover:text-indigo-800 underline">data</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
 
 
@@ -121,12 +160,11 @@
     const ProjectList = {
         props: ['projects'],
         template: `
-            <div>
-                <div v-for="project in projects" class="project-item">
-                    <a :href="'#pypi/' + project.name" class="project-name">{{project.name}}</a>
-                    <span class="project-version">{{project.version}}</span>
-                    <span class="project-time">{{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</span>
-
+            <div class="space-y-3">
+                <div v-for="project in projects" class="bg-white border-l-4 border-indigo-500 shadow rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <a :href="'#pypi/' + project.name" class="text-lg font-semibold text-indigo-600 hover:text-indigo-800 hover:underline">{{project.name}}</a>
+                    <span class="text-sm text-gray-500 ml-2">{{project.version}}</span>
+                    <span class="text-xs text-gray-400 ml-3">{{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</span>
                 </div>
             </div>
         `
