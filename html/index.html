@@ -13,6 +13,14 @@
     <a href="#" @click.prevent="currentPage = 'home'" :class="{ active: currentPage === 'home' }">Home</a>
     <a href="#" @click.prevent="currentPage = 'recent'" :class="{ active: currentPage === 'recent' }">Recent</a>
     <a href="#" @click.prevent="currentPage = 'licenses'" :class="{ active: currentPage === 'licenses' }">Licenses</a>
+    <div class="dropdown">
+      <button class="dropbtn">VCS</button>
+      <div class="dropdown-content">
+        <a href="#" @click.prevent="currentPage = 'vcs'">VCS</a>
+        <a href="#" @click.prevent="currentPage = 'no-vcs'">No VCS</a>
+        <a href="#" @click.prevent="currentPage = 'unrecognized-vcs'">Unrecognized VCS</a>
+      </div>
+    </div>
     <a href="#" @click.prevent="currentPage = 'about'" :class="{ active: currentPage === 'about' }">About</a>
   </div>
 
@@ -41,20 +49,27 @@
   <project-list :projects="data.license.recent_bad_license_projects"></project-list>
   </div>
 
-  <div v-if="currentPage === 'home' && data">
-  Total: {{data.total}}
-  <hr>
+  <div v-if="currentPage === 'vcs' && data">
   <h2>VCS</h2>
   <table>
     <tr v-for="(count, host) in data.vcs.hosts"><td>{{host}}</td><td>{{count}}</td></tr>
   </table>
-  <hr>
+  </div>
+
+  <div v-if="currentPage === 'no-vcs' && data">
+  <h2>No VCS</h2>
   <div>No VCS: {{data.vcs.no_vcs_count}}</div>
   <project-list :projects="data.vcs.recent_no_vcs_projects"></project-list>
+  </div>
 
-  <hr>
+  <div v-if="currentPage === 'unrecognized-vcs' && data">
+  <h2>Unrecognized VCS</h2>
   <div>Unrecognized VCS: {{data.vcs.bad_vcs_count}}</div>
   <project-list :projects="data.vcs.recent_bad_vcs_projects"></project-list>
+  </div>
+
+  <div v-if="currentPage === 'home' && data">
+  Total: {{data.total}}
   </div>
 
   <div class="footer" v-if="pypi">
