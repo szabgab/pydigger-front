@@ -122,12 +122,11 @@
         props: ['projects'],
         template: `
             <div>
-                <div v-for="project in projects">
-                    <div>
-                        <a :href="'#pypi/' + project.name">{{project.name}} {{project.version}}</a> 
-                        - {{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago 
-                        
-                    </div>
+                <div v-for="project in projects" class="project-item">
+                    <a :href="'#pypi/' + project.name" class="project-name">{{project.name}}</a>
+                    <span class="project-version">{{project.version}}</span>
+                    <span class="project-time">{{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</span>
+
                 </div>
             </div>
         `
