@@ -47,6 +47,11 @@
   <div v-if="pypi">
     <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
     <div>Number of entries in the RSS feed: {{pypi.projects_in_rss}}</div>
+    <div>Source:
+        <a href="https://github.com/szabgab/pydigger.rs">backend</a> |
+        <a href="https://github.com/szabgab/pydigger-front">frontend</a> |
+        <a href="https://github.com/szabgab/pydigger-data">data</a>
+    </div>
   </div>
 </div>
 
