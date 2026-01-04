@@ -53,10 +53,9 @@
   <hr>
   <div>Unrecognized VCS: {{data.vcs.bad_vcs_count}}</div>
   <project-list :projects="data.vcs.recent_bad_vcs_projects"></project-list>
+  </div>
 
-
-  <hr>
-  <div v-if="pypi">
+  <div class="footer" v-if="pypi">
     <div>Last data collection started at: {{new Date(pypi.start_date*1000)}}</div>
     <div>Number of entries in the RSS feed: {{pypi.projects_in_rss}}</div>
     <div>Source:
