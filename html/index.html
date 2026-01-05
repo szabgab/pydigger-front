@@ -12,36 +12,49 @@
   <nav class="sticky top-0 z-50 bg-indigo-600 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
-        <div class="flex space-x-4">
-          <a href="#home" @click.prevent="setPage('home')" :class="currentPage === 'home' ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">Home</a>
-          <a href="#recent" @click.prevent="setPage('recent')" :class="currentPage === 'recent' ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">Recent</a>
-          
-          <div class="relative group">
-            <button class="inline-flex items-center px-4 h-full border-b-2 border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white text-sm font-medium transition-colors">
-              Licenses
-              <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-            </button>
-            <div class="absolute left-0 mt-0 w-56 bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-              <a href="#licenses" @click.prevent="setPage('licenses')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Licenses</a>
-              <a href="#no-license" @click.prevent="setPage('no-license')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">No License</a>
-              <a href="#unrecognized-license" @click.prevent="setPage('unrecognized-license')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Unrecognized License</a>
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-4">
+          <template v-for="item in menuItems">
+            <a v-if="!item.submenu" :href="'#' + item.page" @click.prevent="setPage(item.page)" :class="currentPage === item.page ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">{{item.label}}</a>
+            
+            <div v-else class="relative group">
+              <button class="inline-flex items-center px-4 h-full border-b-2 border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white text-sm font-medium transition-colors">
+                {{item.label}}
+                <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="absolute left-0 mt-0 w-56 bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <a v-for="sub in item.submenu" :href="'#' + sub.page" @click.prevent="setPage(sub.page)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">{{sub.label}}</a>
+              </div>
             </div>
-          </div>
-          
-          <div class="relative group">
-            <button class="inline-flex items-center px-4 h-full border-b-2 border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white text-sm font-medium transition-colors">
-              VCS
-              <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-            </button>
-            <div class="absolute left-0 mt-0 w-56 bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-              <a href="#vcs" @click.prevent="setPage('vcs')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">VCS</a>
-              <a href="#no-vcs" @click.prevent="setPage('no-vcs')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">No VCS</a>
-              <a href="#unrecognized-vcs" @click.prevent="setPage('unrecognized-vcs')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Unrecognized VCS</a>
-            </div>
-          </div>
-          
-          <a href="#about" @click.prevent="setPage('about')" :class="currentPage === 'about' ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">About</a>
+          </template>
         </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="inline-flex items-center justify-center p-2 rounded-md text-indigo-100 hover:text-white hover:bg-indigo-700 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div v-show="mobileMenuOpen" class="md:hidden pb-3 space-y-1">
+        <template v-for="item in menuItems">
+          <a v-if="!item.submenu" :href="'#' + item.page" @click.prevent="setPage(item.page); mobileMenuOpen = false" :class="currentPage === item.page ? 'bg-indigo-700 text-white' : 'text-indigo-100 hover:bg-indigo-700 hover:text-white'" class="block px-3 py-2 rounded-md text-base font-medium">{{item.label}}</a>
+          
+          <div v-else>
+            <button @click="item.open = !item.open" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-indigo-100 hover:bg-indigo-700 hover:text-white flex items-center justify-between">
+              <span>{{item.label}}</span>
+              <svg class="h-5 w-5 transition-transform" :class="{'rotate-180': item.open}" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </button>
+            <div v-show="item.open" class="pl-4 space-y-1">
+              <a v-for="sub in item.submenu" :href="'#' + sub.page" @click.prevent="setPage(sub.page); mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-sm text-indigo-100 hover:bg-indigo-700 hover:text-white">{{sub.label}}</a>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </nav>
@@ -223,8 +236,34 @@
             const currentPage = ref('home')
             const projectData = ref(null)
             const projectError = ref(null)
+            const mobileMenuOpen = ref(false)
+            
+            const menuItems = ref([
+                { label: 'Home', page: 'home' },
+                { label: 'Recent', page: 'recent' },
+                { 
+                    label: 'Licenses', 
+                    open: false,
+                    submenu: [
+                        { label: 'Licenses', page: 'licenses' },
+                        { label: 'No License', page: 'no-license' },
+                        { label: 'Unrecognized License', page: 'unrecognized-license' }
+                    ]
+                },
+                { 
+                    label: 'VCS', 
+                    open: false,
+                    submenu: [
+                        { label: 'VCS', page: 'vcs' },
+                        { label: 'No VCS', page: 'no-vcs' },
+                        { label: 'Unrecognized VCS', page: 'unrecognized-vcs' }
+                    ]
+                },
+                { label: 'About', page: 'about' }
+            ])
+            
             return {
-                data, pypi, currentPage, projectData, projectError
+                data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems
             }
         }
     }).mount('#app')
