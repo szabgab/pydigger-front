@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-  <title>PyDiger</title>
+  <title>PyDigger</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
@@ -206,6 +206,26 @@
             'project-list': ProjectList
         },
         computed: {
+            pageTitle() {
+                if (this.currentPage.startsWith('pypi/')) {
+                    const projectName = this.currentPage.substring(5)
+                    return `PyDigger - ${projectName}`
+                }
+                
+                const pageTitles = {
+                    'home': 'PyDigger',
+                    'recent': 'PyDigger - Recent',
+                    'licenses': 'PyDigger - Licenses',
+                    'no-license': 'PyDigger - No License',
+                    'unrecognized-license': 'PyDigger - Unrecognized License',
+                    'vcs': 'PyDigger - VCS',
+                    'no-vcs': 'PyDigger - No VCS',
+                    'unrecognized-vcs': 'PyDigger - Unrecognized VCS',
+                    'about': 'PyDigger - About'
+                }
+                
+                return pageTitles[this.currentPage] || 'PyDigger'
+            },
             sortedLicenses() {
                 if (!this.data || !this.data.license || !this.data.license.licenses) {
                     return []
@@ -233,6 +253,11 @@
                     
                     return this.licenseSortDirection === 'asc' ? comparison : -comparison
                 })
+            }
+        },
+        watch: {
+            pageTitle(newTitle) {
+                document.title = newTitle
             }
         },
         methods: {
