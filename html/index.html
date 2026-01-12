@@ -151,6 +151,17 @@
   <project-list :projects="data.vcs.recent_gitlab_projects"></project-list>
   </div>
 
+  <div v-if="currentPage === 'has-github-actions' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Has GitHub Actions</h2>
+  <project-list :projects="data.vcs.recent_has_github_actions"></project-list>
+  </div>
+
+  <div v-if="currentPage === 'no-github-actions' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">No GitHub Actions</h2>
+  <project-list :projects="data.vcs.recent_no_github_actions"></project-list>
+  </div>
+
+
   <div v-if="currentPage === 'home' && data" class="bg-white shadow rounded-lg p-6">
   <div class="text-lg">Total: <span class="font-bold text-indigo-600">{{data.total}}</span></div>
   </div>
@@ -233,6 +244,8 @@
                     'unrecognized-vcs': 'PyDigger - Unrecognized VCS',
                     'github-projects': 'PyDigger - GitHub Projects',
                     'gitlab-projects': 'PyDigger - GitLab Projects',
+                    'has-github-actions': 'PyDigger - Has GitHub Actions',
+                    'no-github-actions': 'PyDigger - No GitHub Actions',
                     'about': 'PyDigger - About'
                 }
                 
@@ -353,7 +366,9 @@
                         { label: 'No VCS', page: 'no-vcs' },
                         { label: 'Unrecognized VCS', page: 'unrecognized-vcs' },
                         { label: 'GitHub Projects', page: 'github-projects' },
-                        { label: 'GitLab Projects', page: 'gitlab-projects' }
+                        { label: 'GitLab Projects', page: 'gitlab-projects' },
+                        { label: 'Has GitHub Actions', page: 'has-github-actions' },
+                        { label: 'No GitHub Actions', page: 'no-github-actions' }
                     ]
                 },
                 { label: 'About', page: 'about' }
