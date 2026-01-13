@@ -68,7 +68,7 @@
 
   <div v-if="currentPage === 'recent' && data">
     <h2 class="text-2xl font-semibold text-gray-900 mb-6">Recent uploads</h2>
-    <project-list :projects="data.recent_projects"></project-list>
+    <project-list :projects="data.projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'licenses' && data">
@@ -106,13 +106,13 @@
   <div v-if="currentPage === 'no-license' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">No License</h2>
   <div class="mb-6 text-gray-700">No License: <span class="font-semibold">{{data.license.no_license_count}}</span></div>
-  <project-list :projects="data.license.recent_no_license_projects"></project-list>
+  <project-list :projects="data.license.no_license_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'unrecognized-license' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">Unrecognized License</h2>
   <div class="mb-6 text-gray-700">Unrecognized License: <span class="font-semibold">{{data.license.bad_license_count}}</span></div>
-  <project-list :projects="data.license.recent_bad_license_projects"></project-list>
+  <project-list :projects="data.license.bad_license_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'vcs' && data">
@@ -132,33 +132,33 @@
   <div v-if="currentPage === 'no-vcs' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">No VCS</h2>
   <div class="mb-6 text-gray-700">No VCS: <span class="font-semibold">{{data.vcs.no_vcs_count}}</span></div>
-  <project-list :projects="data.vcs.recent_no_vcs_projects"></project-list>
+  <project-list :projects="data.vcs.no_vcs_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'unrecognized-vcs' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">Unrecognized VCS</h2>
   <div class="mb-6 text-gray-700">Unrecognized VCS: <span class="font-semibold">{{data.vcs.bad_vcs_count}}</span></div>
-  <project-list :projects="data.vcs.recent_bad_vcs_projects"></project-list>
+  <project-list :projects="data.vcs.bad_vcs_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'github-projects' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">GitHub Projects</h2>
-  <project-list :projects="data.vcs.recent_github_projects"></project-list>
+  <project-list :projects="data.vcs.github_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'gitlab-projects' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">GitLab Projects</h2>
-  <project-list :projects="data.vcs.recent_gitlab_projects"></project-list>
+  <project-list :projects="data.vcs.gitlab_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'has-github-actions' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">Has GitHub Actions</h2>
-  <project-list :projects="data.vcs.recent_has_github_actions"></project-list>
+  <project-list :projects="data.vcs.has_github_actions"></project-list>
   </div>
 
   <div v-if="currentPage === 'no-github-actions' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">No GitHub Actions</h2>
-  <project-list :projects="data.vcs.recent_no_github_actions"></project-list>
+  <project-list :projects="data.vcs.no_github_actions"></project-list>
   </div>
 
 
