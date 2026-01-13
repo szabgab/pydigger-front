@@ -221,6 +221,7 @@
                     <a :href="'#pypi/' + project.name" class="text-lg font-semibold text-indigo-600 hover:text-indigo-800 hover:underline">{{project.name}}</a>
                     <span class="text-sm text-gray-500 ml-2">{{project.version}}</span>
                     <span class="text-xs text-gray-400 ml-3">{{ Math.floor((new Date()-project.pub_date*1000)/1000) }} sec ago</span>
+                    <div>{{project.summary}}</div>
                 </div>
             </div>
         `
