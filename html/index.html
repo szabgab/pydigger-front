@@ -143,21 +143,25 @@
 
   <div v-if="currentPage === 'github-projects' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">GitHub Projects</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.github_count}}</span></div>
   <project-list :projects="data.vcs.github_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'gitlab-projects' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">GitLab Projects</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.gitlab_count}}</span></div>
   <project-list :projects="data.vcs.gitlab_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'has-github-actions' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">Has GitHub Actions</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.has_github_actions_count}}</span></div>
   <project-list :projects="data.vcs.has_github_actions"></project-list>
   </div>
 
   <div v-if="currentPage === 'no-github-actions' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">No GitHub Actions</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.no_github_actions_count}}</span></div>
   <project-list :projects="data.vcs.no_github_actions"></project-list>
   </div>
 
