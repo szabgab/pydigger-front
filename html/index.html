@@ -16,7 +16,7 @@
         <div class="hidden md:flex space-x-4">
           <template v-for="item in menuItems">
             <a v-if="!item.submenu" :href="'#' + item.page" @click.prevent="setPage(item.page)" :class="currentPage === item.page ? 'border-indigo-300 text-white' : 'border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white'" class="inline-flex items-center px-4 border-b-2 text-sm font-medium transition-colors">{{item.label}}</a>
-            
+
             <div v-else class="relative group">
               <button class="inline-flex items-center px-4 h-full border-b-2 border-transparent text-indigo-100 hover:border-indigo-200 hover:text-white text-sm font-medium transition-colors">
                 {{item.label}}
@@ -44,7 +44,7 @@
       <div v-show="mobileMenuOpen" class="md:hidden pb-3 space-y-1">
         <template v-for="item in menuItems">
           <a v-if="!item.submenu" :href="'#' + item.page" @click.prevent="setPage(item.page); mobileMenuOpen = false" :class="currentPage === item.page ? 'bg-indigo-700 text-white' : 'text-indigo-100 hover:bg-indigo-700 hover:text-white'" class="block px-3 py-2 rounded-md text-base font-medium">{{item.label}}</a>
-          
+
           <div v-else>
             <button @click="item.open = !item.open" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-indigo-100 hover:bg-indigo-700 hover:text-white flex items-center justify-between">
               <span>{{item.label}}</span>
@@ -237,7 +237,7 @@
                     const projectName = this.currentPage.substring(5)
                     return `PyDigger - ${projectName}`
                 }
-                
+
                 const pageTitles = {
                     'home': 'PyDigger',
                     'recent': 'PyDigger - Recent',
@@ -253,7 +253,7 @@
                     'no-github-actions': 'PyDigger - No GitHub Actions',
                     'about': 'PyDigger - About'
                 }
-                
+
                 return pageTitles[this.currentPage] || 'PyDigger'
             },
             sortedLicenses() {
@@ -264,23 +264,23 @@
                     license,
                     count
                 }))
-                
+
                 return licensesArray.sort((a, b) => {
                     let compareA = a[this.licenseSortColumn]
                     let compareB = b[this.licenseSortColumn]
-                    
+
                     if (this.licenseSortColumn === 'count') {
                         compareA = Number(compareA)
                         compareB = Number(compareB)
                     }
-                    
+
                     let comparison = 0
                     if (compareA > compareB) {
                         comparison = 1
                     } else if (compareA < compareB) {
                         comparison = -1
                     }
-                    
+
                     return this.licenseSortDirection === 'asc' ? comparison : -comparison
                 })
             }
@@ -350,12 +350,12 @@
             const mobileMenuOpen = ref(false)
             const licenseSortColumn = ref('license')
             const licenseSortDirection = ref('asc')
-            
+
             const menuItems = ref([
                 { label: 'Home', page: 'home' },
                 { label: 'Recent', page: 'recent' },
-                { 
-                    label: 'Licenses', 
+                {
+                    label: 'Licenses',
                     open: false,
                     submenu: [
                         { label: 'Licenses', page: 'licenses' },
@@ -363,8 +363,8 @@
                         { label: 'Unrecognized License', page: 'unrecognized-license' }
                     ]
                 },
-                { 
-                    label: 'VCS', 
+                {
+                    label: 'VCS',
                     open: false,
                     submenu: [
                         { label: 'VCS', page: 'vcs' },
@@ -378,7 +378,7 @@
                 },
                 { label: 'About', page: 'about' }
             ])
-            
+
             return {
                 data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems, licenseSortColumn, licenseSortDirection
             }
