@@ -156,13 +156,13 @@
   <div v-if="currentPage === 'github-projects' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">GitHub Projects</h2>
   <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.github_count}}</span></div>
-  <project-list :projects="data.vcs.github"></project-list>
+  <project-list :projects="data.vcs.github_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'gitlab-projects' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">GitLab Projects</h2>
   <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.gitlab_count}}</span></div>
-  <project-list :projects="data.vcs.gitlab"></project-list>
+  <project-list :projects="data.vcs.gitlab_projects"></project-list>
   </div>
 
   <div v-if="currentPage === 'has-github-actions' && data">
@@ -194,6 +194,8 @@
     <div class="mb-6 text-gray-700"><a href="/#no-license" class="text-indigo-600 hover:text-indigo-800 underline">No License</a>: <span class="font-semibold">{{data.license.no_license_count}}</span></div>
     <div class="mb-6 text-gray-700"><a href="/#unrecognized-license" class="text-indigo-600 hover:text-indigo-800 underline">Unrecognized License</a>: <span class="font-semibold">{{data.license.bad_license_count}}</span></div>
     <div class="mb-6 text-gray-700"><a href="/#long-license" class="text-indigo-600 hover:text-indigo-800 underline">Long License</a>: <span class="font-semibold">{{data.license.long_license_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#github-projects" class="text-indigo-600 hover:text-indigo-800 underline">On GitHub</a>: <span class="font-semibold">{{data.vcs.github_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#gitlab-projects" class="text-indigo-600 hover:text-indigo-800 underline">On GitLab</a>: <span class="font-semibold">{{data.vcs.gitlab_count}}</span></div>
     <div class="mb-6 text-gray-700"><a href="/#no-vcs" class="text-indigo-600 hover:text-indigo-800 underline">No VCS</a>: <span class="font-semibold">{{data.vcs.no_vcs_count}}</span></div>
     <div class="mb-6 text-gray-700"><a href="/#unrecognized-vcs" class="text-indigo-600 hover:text-indigo-800 underline">Unrecognized VCS</a>: <span class="font-semibold">{{data.vcs.bad_vcs_count}}</span></div>
     <div class="mb-6 text-gray-700"><a href="/#has-github-actions" class="text-indigo-600 hover:text-indigo-800 underline">Has GitHub Actions</a>: <span class="font-semibold">{{data.vcs.has_github_actions_count}}</span></div>
