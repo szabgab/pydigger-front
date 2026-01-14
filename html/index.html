@@ -64,6 +64,11 @@
 
   <div v-if="currentPage === 'about'" class="bg-white shadow rounded-lg p-6">
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">About PyDigger</h2>
+    This is the "new" PyDigger. It still does not have many of the features the old one had, but it is being improved.
+    Feel free to open issues on the repository of the <a href="https://github.com/szabgab/pydigger.rs" class="text-indigo-600 hover:text-indigo-800 underline">backend</a> that collects the data
+    and the <a href="https://github.com/szabgab/pydigger-front" class="text-indigo-600 hover:text-indigo-800 underline">frontend</a> that displays it.
+    <hr>
+    Main developer: <a href="https://szabgab.com/" class="text-indigo-600 hover:text-indigo-800 underline">Gabor Szabo</a>.
   </div>
 
   <div v-if="currentPage === 'recent' && data">
@@ -185,7 +190,16 @@
   </div>
 
   <div v-if="currentPage === 'home' && data" class="bg-white shadow rounded-lg p-6">
-  <div class="text-lg">Total: <span class="font-bold text-indigo-600">{{data.total}}</span></div>
+    <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.total}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#no-license" class="text-indigo-600 hover:text-indigo-800 underline">No License</a>: <span class="font-semibold">{{data.license.no_license_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#unrecognized-license" class="text-indigo-600 hover:text-indigo-800 underline">Unrecognized License</a>: <span class="font-semibold">{{data.license.bad_license_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#long-license" class="text-indigo-600 hover:text-indigo-800 underline">Long License</a>: <span class="font-semibold">{{data.license.long_license_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#no-vcs" class="text-indigo-600 hover:text-indigo-800 underline">No VCS</a>: <span class="font-semibold">{{data.vcs.no_vcs_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#unrecognized-vcs" class="text-indigo-600 hover:text-indigo-800 underline">Unrecognized VCS</a>: <span class="font-semibold">{{data.vcs.bad_vcs_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#has-github-actions" class="text-indigo-600 hover:text-indigo-800 underline">Has GitHub Actions</a>: <span class="font-semibold">{{data.vcs.has_github_actions_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#no-github-actions" class="text-indigo-600 hover:text-indigo-800 underline">No GitHub Actions</a>: <span class="font-semibold">{{data.vcs.no_github_actions_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#has-gitlab-pipeline" class="text-indigo-600 hover:text-indigo-800 underline">Has GitLab pipeline</a>: <span class="font-semibold">{{data.vcs.has_gitlab_pipeline_count}}</span></div>
+    <div class="mb-6 text-gray-700"><a href="/#no-gitlab-pipeline" class="text-indigo-600 hover:text-indigo-800 underline">No GitLab pipeline</a>: <span class="font-semibold">{{data.vcs.no_gitlab_pipeline_count}}</span></div>
   </div>
 
   <div v-if="currentPage.startsWith('pypi/') && projectData" class="bg-white shadow rounded-lg p-6">
