@@ -165,6 +165,17 @@
   <project-list :projects="data.vcs.no_github_actions"></project-list>
   </div>
 
+  <div v-if="currentPage === 'has-gitlab-pipeline' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Has GitLab Pipeline</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.has_gitlab_pipeline_count}}</span></div>
+  <project-list :projects="data.vcs.has_gitlab_pipeline"></project-list>
+  </div>
+
+  <div v-if="currentPage === 'no-gitlab-pipeline' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">No GitLab Pipeline</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.no_gitlab_pipeline_count}}</span></div>
+  <project-list :projects="data.vcs.no_gitlab_pipeline"></project-list>
+  </div>
 
   <div v-if="currentPage === 'home' && data" class="bg-white shadow rounded-lg p-6">
   <div class="text-lg">Total: <span class="font-bold text-indigo-600">{{data.total}}</span></div>
@@ -251,6 +262,8 @@
                     'gitlab-projects': 'PyDigger - GitLab Projects',
                     'has-github-actions': 'PyDigger - Has GitHub Actions',
                     'no-github-actions': 'PyDigger - No GitHub Actions',
+                    'has-gitlab-pipeline': 'PyDigger - Has GitLab Pipeline',
+                    'no-gitlab-pipeline': 'PyDigger - No GitLab Pipeline',
                     'about': 'PyDigger - About'
                 }
 
@@ -373,7 +386,9 @@
                         { label: 'GitHub Projects', page: 'github-projects' },
                         { label: 'GitLab Projects', page: 'gitlab-projects' },
                         { label: 'Has GitHub Actions', page: 'has-github-actions' },
-                        { label: 'No GitHub Actions', page: 'no-github-actions' }
+                        { label: 'No GitHub Actions', page: 'no-github-actions' },
+                        { label: 'Has GitLab Pipeline', page: 'has-gitlab-pipeline' },
+                        { label: 'No GitLab Pipeline', page: 'no-gitlab-pipeline' }
                     ]
                 },
                 { label: 'About', page: 'about' }
