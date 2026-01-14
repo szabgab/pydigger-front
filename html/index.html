@@ -115,6 +115,13 @@
   <project-list :projects="data.license.bad_license"></project-list>
   </div>
 
+  <div v-if="currentPage === 'long-license' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Long License</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.license.long_license_count}}</span></div>
+  <project-list :projects="data.license.long_license"></project-list>
+  </div>
+
+
   <div v-if="currentPage === 'vcs' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-6">VCS</h2>
   <div class="bg-white shadow rounded-lg overflow-hidden">
@@ -255,6 +262,7 @@
                     'licenses': 'PyDigger - Licenses',
                     'no-license': 'PyDigger - No License',
                     'unrecognized-license': 'PyDigger - Unrecognized License',
+                    'long-license': 'PyDigger - Long License',
                     'vcs': 'PyDigger - VCS',
                     'no-vcs': 'PyDigger - No VCS',
                     'unrecognized-vcs': 'PyDigger - Unrecognized VCS',
@@ -373,7 +381,8 @@
                     submenu: [
                         { label: 'Licenses', page: 'licenses' },
                         { label: 'No License', page: 'no-license' },
-                        { label: 'Unrecognized License', page: 'unrecognized-license' }
+                        { label: 'Unrecognized License', page: 'unrecognized-license' },
+                        { label: 'Long License', page: 'long-license' }
                     ]
                 },
                 {
