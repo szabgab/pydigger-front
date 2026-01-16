@@ -219,7 +219,11 @@
     <h2 class="text-3xl font-bold text-gray-900 mb-6">{{projectData.name}} <span class="text-xl text-gray-500">{{projectData.version}}</span></h2>
     <div class="space-y-3">
       <div v-if="projectData.license" class="text-gray-700"><span class="font-semibold">License:</span> {{projectData.license}}</div>
-      <div v-if="projectData.home_page" class="text-gray-700"><span class="font-semibold">Home page:</span> <a :href="projectData.home_page" class="text-indigo-600 hover:text-indigo-800 underline">{{projectData.home_page}}</a></div>
+      <div class="text-gray-700">
+        <span class="font-semibold">Home page:</span>
+        <a v-if="projectData.home_page" :href="projectData.home_page" class="text-indigo-600 hover:text-indigo-800 underline">{{projectData.home_page}}</a>
+        <span v-else class="text-red-600 font-semibold">no homepage</span>
+      </div>
       <div v-if="projectData.summary" class="text-gray-700"><span class="font-semibold">Summary:</span> {{projectData.summary}}</div>
       <div class="text-gray-700"><span class="font-semibold">Published:</span> {{new Date(projectData.pub_date*1000)}}</div>
       <div class="flex gap-4 mt-4">
