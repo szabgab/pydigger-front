@@ -179,6 +179,18 @@
   <project-list :projects="data.vcs.no_github_actions"></project-list>
   </div>
 
+  <div v-if="currentPage === 'has-dependabot' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Has Dependabot</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.has_dependabot_count}}</span></div>
+  <project-list :projects="data.vcs.has_dependabot"></project-list>
+  </div>
+
+  <div v-if="currentPage === 'no-dependabot' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">No Dependabot</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.no_dependabot_count}}</span></div>
+  <project-list :projects="data.vcs.no_dependabot"></project-list>
+  </div>
+
   <div v-if="currentPage === 'has-gitlab-pipeline' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">Has GitLab Pipeline</h2>
   <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.has_gitlab_pipeline_count}}</span></div>
@@ -429,6 +441,8 @@
                 { label: 'Unrecognized VCS', page: 'unrecognized-vcs', getValue: (data) => data.vcs.bad_vcs_count },
                 { label: 'Has GitHub Actions', page: 'has-github-actions', getValue: (data) => data.vcs.has_github_actions_count },
                 { label: 'No GitHub Actions', page: 'no-github-actions', getValue: (data) => data.vcs.no_github_actions_count },
+                { label: 'Has Dependabot', page: 'has-dependabot', getValue: (data) => data.vcs.has_dependabot_count },
+                { label: 'No Dependabot', page: 'no-dependabot', getValue: (data) => data.vcs.no_dependabot_count },
                 { label: 'Has GitLab pipeline', page: 'has-gitlab-pipeline', getValue: (data) => data.vcs.has_gitlab_pipeline_count },
                 { label: 'No GitLab pipeline', page: 'no-gitlab-pipeline', getValue: (data) => data.vcs.no_gitlab_pipeline_count }
             ])
@@ -457,6 +471,8 @@
                         { label: 'GitLab Projects', page: 'gitlab-projects' },
                         { label: 'Has GitHub Actions', page: 'has-github-actions' },
                         { label: 'No GitHub Actions', page: 'no-github-actions' },
+                        { label: 'Has Dependabot', page: 'has-dependabot' },
+                        { label: 'No Dependabot', page: 'no-dependabot' },
                         { label: 'Has GitLab Pipeline', page: 'has-gitlab-pipeline' },
                         { label: 'No GitLab Pipeline', page: 'no-gitlab-pipeline' }
                     ]
