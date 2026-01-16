@@ -96,12 +96,14 @@
               <span v-else>▼</span>
             </span>
           </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         <tr v-for="item in sortedLicenses" class="hover:bg-gray-50" :class="{'bg-indigo-50': item.isSpecial}">
           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" :class="item.isSpecial ? 'text-indigo-900 font-bold' : 'text-gray-900'">{{item.license}}</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm" :class="item.isSpecial ? 'text-indigo-900 font-semibold' : 'text-gray-500'">{{item.count}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm" :class="item.isSpecial ? 'text-indigo-900 font-semibold' : 'text-gray-500'">{{((item.count / data.total) * 100).toFixed(2)}}%</td>
         </tr>
       </tbody>
     </table>
