@@ -223,6 +223,11 @@
         <span v-if="projectData.author">{{projectData.author}}</span>
         <span v-else class="text-red-600 font-semibold">missing author</span>
       </div>
+      <div class="text-gray-700">
+        <span class="font-semibold">Maintainer:</span>
+        <span v-if="projectData.maintainer">{{projectData.maintainer}}</span>
+        <span v-else>no maintainer</span>
+      </div>
       <div v-if="projectData.license" class="text-gray-700"><span class="font-semibold">License:</span> {{projectData.license}}</div>
       <div class="text-gray-700">
         <span class="font-semibold">Home page:</span>
