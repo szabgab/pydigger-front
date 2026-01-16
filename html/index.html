@@ -99,9 +99,9 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="item in sortedLicenses" class="hover:bg-gray-50">
-          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.license}}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{item.count}}</td>
+        <tr v-for="item in sortedLicenses" class="hover:bg-gray-50" :class="{'bg-indigo-50': item.isSpecial}">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" :class="item.isSpecial ? 'text-indigo-900 font-bold' : 'text-gray-900'">{{item.license}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm" :class="item.isSpecial ? 'text-indigo-900 font-semibold' : 'text-gray-500'">{{item.count}}</td>
         </tr>
       </tbody>
     </table>
@@ -308,8 +308,14 @@
                 }
                 const licensesArray = Object.entries(this.data.license.licenses).map(([license, count]) => ({
                     license,
-                    count
+                    count,
+                    isSpecial: false
                 }))
+
+                // Add special license categories
+                licensesArray.push({ license: 'No License', count: this.data.license.no_license_count, isSpecial: true })
+                licensesArray.push({ license: 'Unrecognized License', count: this.data.license.bad_license_count, isSpecial: true })
+                licensesArray.push({ license: 'Long License', count: this.data.license.long_license_count, isSpecial: true })
 
                 return licensesArray.sort((a, b) => {
                     let compareA = a[this.licenseSortColumn]
