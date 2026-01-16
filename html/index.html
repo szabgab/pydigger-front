@@ -197,6 +197,7 @@
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Count</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -205,6 +206,7 @@
               <a :href="'/#' + item.page" class="text-indigo-600 hover:text-indigo-800 underline">{{item.label}}</a>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{item.getValue(data)}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{((item.getValue(data) / data.total) * 100).toFixed(2)}}%</td>
           </tr>
         </tbody>
       </table>
