@@ -218,6 +218,11 @@
   <div v-if="currentPage.startsWith('pypi/') && projectData" class="bg-white shadow rounded-lg p-6">
     <h2 class="text-3xl font-bold text-gray-900 mb-6">{{projectData.name}} <span class="text-xl text-gray-500">{{projectData.version}}</span></h2>
     <div class="space-y-3">
+      <div class="text-gray-700">
+        <span class="font-semibold">Author:</span>
+        <span v-if="projectData.author">{{projectData.author}}</span>
+        <span v-else class="text-red-600 font-semibold">missing author</span>
+      </div>
       <div v-if="projectData.license" class="text-gray-700"><span class="font-semibold">License:</span> {{projectData.license}}</div>
       <div class="text-gray-700">
         <span class="font-semibold">Home page:</span>
