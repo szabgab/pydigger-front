@@ -191,17 +191,9 @@
 
   <div v-if="currentPage === 'home' && data" class="bg-white shadow rounded-lg p-6">
     <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.total}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#no-license" class="text-indigo-600 hover:text-indigo-800 underline">No License</a>: <span class="font-semibold">{{data.license.no_license_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#unrecognized-license" class="text-indigo-600 hover:text-indigo-800 underline">Unrecognized License</a>: <span class="font-semibold">{{data.license.bad_license_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#long-license" class="text-indigo-600 hover:text-indigo-800 underline">Long License</a>: <span class="font-semibold">{{data.license.long_license_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#github-projects" class="text-indigo-600 hover:text-indigo-800 underline">On GitHub</a>: <span class="font-semibold">{{data.vcs.github_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#gitlab-projects" class="text-indigo-600 hover:text-indigo-800 underline">On GitLab</a>: <span class="font-semibold">{{data.vcs.gitlab_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#no-vcs" class="text-indigo-600 hover:text-indigo-800 underline">No VCS</a>: <span class="font-semibold">{{data.vcs.no_vcs_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#unrecognized-vcs" class="text-indigo-600 hover:text-indigo-800 underline">Unrecognized VCS</a>: <span class="font-semibold">{{data.vcs.bad_vcs_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#has-github-actions" class="text-indigo-600 hover:text-indigo-800 underline">Has GitHub Actions</a>: <span class="font-semibold">{{data.vcs.has_github_actions_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#no-github-actions" class="text-indigo-600 hover:text-indigo-800 underline">No GitHub Actions</a>: <span class="font-semibold">{{data.vcs.no_github_actions_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#has-gitlab-pipeline" class="text-indigo-600 hover:text-indigo-800 underline">Has GitLab pipeline</a>: <span class="font-semibold">{{data.vcs.has_gitlab_pipeline_count}}</span></div>
-    <div class="mb-6 text-gray-700"><a href="/#no-gitlab-pipeline" class="text-indigo-600 hover:text-indigo-800 underline">No GitLab pipeline</a>: <span class="font-semibold">{{data.vcs.no_gitlab_pipeline_count}}</span></div>
+    <div v-for="item in homePageItems" :key="item.page" class="mb-6 text-gray-700">
+      <a :href="'/#' + item.page" class="text-indigo-600 hover:text-indigo-800 underline">{{item.label}}</a>: <span class="font-semibold">{{item.getValue(data)}}</span>
+    </div>
   </div>
 
   <div v-if="currentPage.startsWith('pypi/') && projectData" class="bg-white shadow rounded-lg p-6">
@@ -388,6 +380,20 @@
             const licenseSortColumn = ref('license')
             const licenseSortDirection = ref('asc')
 
+            const homePageItems = ref([
+                { label: 'No License', page: 'no-license', getValue: (data) => data.license.no_license_count },
+                { label: 'Unrecognized License', page: 'unrecognized-license', getValue: (data) => data.license.bad_license_count },
+                { label: 'Long License', page: 'long-license', getValue: (data) => data.license.long_license_count },
+                { label: 'On GitHub', page: 'github-projects', getValue: (data) => data.vcs.github_count },
+                { label: 'On GitLab', page: 'gitlab-projects', getValue: (data) => data.vcs.gitlab_count },
+                { label: 'No VCS', page: 'no-vcs', getValue: (data) => data.vcs.no_vcs_count },
+                { label: 'Unrecognized VCS', page: 'unrecognized-vcs', getValue: (data) => data.vcs.bad_vcs_count },
+                { label: 'Has GitHub Actions', page: 'has-github-actions', getValue: (data) => data.vcs.has_github_actions_count },
+                { label: 'No GitHub Actions', page: 'no-github-actions', getValue: (data) => data.vcs.no_github_actions_count },
+                { label: 'Has GitLab pipeline', page: 'has-gitlab-pipeline', getValue: (data) => data.vcs.has_gitlab_pipeline_count },
+                { label: 'No GitLab pipeline', page: 'no-gitlab-pipeline', getValue: (data) => data.vcs.no_gitlab_pipeline_count }
+            ])
+
             const menuItems = ref([
                 { label: 'Home', page: 'home' },
                 { label: 'Recent', page: 'recent' },
@@ -420,7 +426,7 @@
             ])
 
             return {
-                data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems, licenseSortColumn, licenseSortDirection
+                data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems, licenseSortColumn, licenseSortDirection, homePageItems
             }
         }
     }).mount('#app')
