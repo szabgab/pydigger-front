@@ -189,10 +189,25 @@
   <project-list :projects="data.vcs.no_gitlab_pipeline"></project-list>
   </div>
 
-  <div v-if="currentPage === 'home' && data" class="bg-white shadow rounded-lg p-6">
-    <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.total}}</span></div>
-    <div v-for="item in homePageItems" :key="item.page" class="mb-6 text-gray-700">
-      <a :href="'/#' + item.page" class="text-indigo-600 hover:text-indigo-800 underline">{{item.label}}</a>: <span class="font-semibold">{{item.getValue(data)}}</span>
+  <div v-if="currentPage === 'home' && data">
+    <div class="mb-6 text-lg text-gray-700">Total: <span class="font-semibold">{{data.total}}</span></div>
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Count</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr v-for="item in homePageItems" :key="item.page" class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <a :href="'/#' + item.page" class="text-indigo-600 hover:text-indigo-800 underline">{{item.label}}</a>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{item.getValue(data)}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
