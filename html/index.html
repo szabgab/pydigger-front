@@ -64,11 +64,21 @@
 
   <div v-if="currentPage === 'about'" class="bg-white shadow rounded-lg p-6">
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">About PyDigger</h2>
-    This is the "new" PyDigger. It still does not have many of the features the old one had, but it is being improved.
-    Feel free to open issues on the repository of the <a href="https://github.com/szabgab/pydigger.rs" class="text-indigo-600 hover:text-indigo-800 underline">backend</a> that collects the data
-    and the <a href="https://github.com/szabgab/pydigger-front" class="text-indigo-600 hover:text-indigo-800 underline">frontend</a> that displays it.
-    <hr>
-    Main developer: <a href="https://szabgab.com/" class="text-indigo-600 hover:text-indigo-800 underline">Gabor Szabo</a>.
+      <div>
+        The goal of this project is to analyze Python package uploaded to PyPI and find relatively easy ways to contribute to the Python ecosystem.
+        Some of the smallest contributions could be making improvements to the meta-data of the project that is usually stored in the <i>pyproject.toml</i> file.
+        For example many packages <a href="/#no-vcs">do not include a link to their public VCS (Version Control System)</a>. Adding it will make it possible
+        for PyPI to link to the repository and it will make it easier for the next potential contributor to find the source code and contribute to the package.
+        See <a href="/#docs-vcs">how to add VCS to a Python project</a>
+     </div>
+
+     <div>
+       This is the "new" PyDigger. It still does not have many of the features the old one had, but it is being improved.
+       Feel free to open issues on the repository of the <a href="https://github.com/szabgab/pydigger.rs" class="text-indigo-600 hover:text-indigo-800 underline">backend</a> that collects the data
+       and the <a href="https://github.com/szabgab/pydigger-front" class="text-indigo-600 hover:text-indigo-800 underline">frontend</a> that displays it.
+       <hr>
+       Main developer: <a href="https://szabgab.com/" class="text-indigo-600 hover:text-indigo-800 underline">Gabor Szabo</a>.
+     </div>
   </div>
 
   <div v-if="currentPage === 'recent' && data">
