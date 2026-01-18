@@ -420,6 +420,25 @@
       </div>
   </div>
 
+  <div v-if="currentPage === 'docs-packaging' && data">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Packaging</h2>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">setup.cfg / setup.py</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        <ul>
+            <li><a href="https://docs.python.org/distutils/setupscript.html">setupscript</a></li>
+        </ul>
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">pyproject.toml</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        <ul>
+            <li><a href="https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/">pyproject-toml by pip</a></li>
+            <li><a href="https://peps.python.org/pep-0621/">PEP 621 – Storing project metadata in pyproject.toml</a></li>
+            <li><a href="https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html">Configuring setuptools using pyproject.toml files</a></li>
+            <li><a href="https://python-poetry.org/docs/pyproject/">The pyproject.toml file</a> at Poetry</a></li>
+        </ul>
+      </div>
+  </div>
+
   <div v-if="currentPage === 'docs-summary' && data">
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding Summary</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -545,6 +564,7 @@
                     'no-gitlab-pipeline': 'PyDigger - No GitLab Pipeline',
                     'docs-author': 'PyDigger - Author',
                     'docs-license': 'PyDigger - License',
+                    'docs-packaging': 'PyDigger - Packaging',
                     'docs-summary': 'PyDigger - Summary',
                     'docs-vcs': 'PyDigger - Version Control System (VCS)',
                     'about': 'PyDigger - About'
@@ -706,7 +726,8 @@
                         { label: 'VCS', page: 'docs-vcs' },
                         { label: 'Author', page: 'docs-author' },
                         { label: 'License', page: 'docs-license' },
-                        { label: 'Summary', page: 'docs-summary' }
+                        { label: 'Summary', page: 'docs-summary' },
+                        { label: 'Packaging', page: 'docs-packaging' }
                     ]
                 },
                 { label: 'About', page: 'about' }
