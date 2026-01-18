@@ -326,13 +326,13 @@
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         The Pydigger site monitors the uploads to <a href="https://pypi.org/" class="text-indigo-600 hover:text-indigo-800 underline">PyPI</a> and collects meta-data about the packages.
-        It shows various <a href="/stats" class="text-indigo-600 hover:text-indigo-800 underline">statistics</a> and points you to packages that could be improved by adding some simple meta-data to them.
+        It shows various <a href="/#stats" class="text-indigo-600 hover:text-indigo-800 underline">statistics</a> and points you to packages that could be improved by adding some simple meta-data to them.
         One of the easiste to fix is the missing <b>author</b> field.
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding Author</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         Each package can have a field called <b>author</b> that contains the name of, well the author. Accourding to our stats about
-        4.6% of the packages <a href="/search/no-author" class="text-indigo-600 hover:text-indigo-800 underline">have not author field</a>. About 1% <a href="/search/has-vcs-no-author" class="text-indigo-600 hover:text-indigo-800 underline">has VCS but no author field</a>
+        4.6% of the packages <a href="/#no-author" class="text-indigo-600 hover:text-indigo-800 underline">have not author field</a>. About 1% <a href="/#has-vcs-no-author" class="text-indigo-600 hover:text-indigo-800 underline">has VCS but no author field</a>
         making them very easy to fix. (Locating the missing VCS-es (ak Version Control System) will be the material of another post.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -365,7 +365,7 @@
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Steps you can take</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         <ul>
-            <li>Visit the <a href="/search/has-vcs-no-author" class="text-indigo-600 hover:text-indigo-800 underline">list of packages that have VCS but no author field</a> and pick one.</li>
+            <li>Visit the <a href="/#has-vcs-no-author" class="text-indigo-600 hover:text-indigo-800 underline">list of packages that have VCS but no author field</a> and pick one.</li>
             <li>Visit the source code of the package. (Link is on the page of the package)</li>
             <li>In the VCS (Github, GitLab, Bitbucket, etc. look for the name of the author of the package.</li>
             <li>Locate the <b>setup.py</b> in the root of the repository</li>
@@ -389,7 +389,7 @@
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Shortening the license field</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        We can <a href="/search?license=__long__" class="text-indigo-600 hover:text-indigo-800 underline">list package with long licenses</a> (over 50 character), but we don't have a way to list the ones that also have a VCS.
+        We can <a href="/#long-license" class="text-indigo-600 hover:text-indigo-800 underline">list package with long licenses</a> (over 50 character), but we don't have a way to list the ones that also have a VCS.
         In general it would be better to use a short and standard name for each license. That will make them more comparable.
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">The technical details</h2>
