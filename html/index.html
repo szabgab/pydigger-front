@@ -372,6 +372,31 @@
       </div>
   </div>
 
+  <div v-if="currentPage === 'docs-summary' && data">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding Summary</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Adding the <b>summary</b> is technically very similar to adding the <a href="/#docs-author">author field</a>, but knowing what to write is a bit more challenging.
+        You'll have to understand what is the project about and you must be able to write a one-line description.
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Alternatively you can locate the bug-tracking system of the project (they are usually the same place the version control system can be found) and you can open
+        a ticket or issue depending the word the particular system uses.
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">The technical details</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        The JSON file of each package can have a field called <b>summary</b> that contains the short description of the package.
+        The most common way to include it in the packages is to add a field called <b>description</b> to the <b>setup</b> function in the <b>setup.py</b> of the project.
+        (Not to be confused with the <b>long_description</b>.)
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        In <b>setup</b> use the field <b>description</b> to provide a one-line description that will become the <b>summary</b> field in the JSON file.<br>
+        In <b>setup</b> use the field <b>long_descrption</b> to provide, well, a long description that will become the <b>description</b> field in the JSON file.
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Yes, I know the naming is a bit confusing.
+      </div>
+  </div>
+
   <div v-if="currentPage.startsWith('pypi/') && projectData" class="bg-white shadow rounded-lg p-6">
     <h2 class="text-3xl font-bold text-gray-900 mb-6">{{projectData.name}} <span class="text-xl text-gray-500">{{projectData.version}}</span></h2>
     <div class="space-y-3">
@@ -471,6 +496,7 @@
                     'has-gitlab-pipeline': 'PyDigger - Has GitLab Pipeline',
                     'no-gitlab-pipeline': 'PyDigger - No GitLab Pipeline',
                     'docs-author': 'PyDigger - Author',
+                    'docs-summary': 'PyDigger - Summary',
                     'docs-vcs': 'PyDigger - Version Control System (VCS)',
                     'about': 'PyDigger - About'
                 }
@@ -629,7 +655,8 @@
                     open: false,
                     submenu: [
                         { label: 'VCS', page: 'docs-vcs' },
-                        { label: 'Author', page: 'docs-author' }
+                        { label: 'Author', page: 'docs-author' },
+                        { label: 'Summary', page: 'docs-summary' }
                     ]
                 },
                 { label: 'About', page: 'about' }
