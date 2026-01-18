@@ -67,9 +67,9 @@
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         The goal of this project is to analyze Python package uploaded to PyPI and find relatively easy ways to contribute to the Python ecosystem.
         Some of the smallest contributions could be making improvements to the meta-data of the project that is usually stored in the <i>pyproject.toml</i> file.
-        For example many packages <a href="/#no-vcs">do not include a link to their public VCS (Version Control System)</a>. Adding it will make it possible
+        For example many packages <a href="/#no-vcs" class="text-indigo-600 hover:text-indigo-800 underline">do not include a link to their public VCS (Version Control System)</a>. Adding it will make it possible
         for PyPI to link to the repository and it will make it easier for the next potential contributor to find the source code and contribute to the package.
-        See <a href="/#docs-vcs">how to add VCS to a Python project</a>
+        See <a href="/#docs-vcs" class="text-indigo-600 hover:text-indigo-800 underline">how to add VCS to a Python project</a>
      </div>
 
      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -218,10 +218,14 @@
   </div>
 
   <div v-if="currentPage === 'home' && data">
-    <div class="mb-6 text-lg text-gray-700">Total: <span class="font-semibold">{{data.total}}</span></div>
     The goal is to improve the Python ecosystem step-by-step starting with really small contributions such as updating some of the
     meta-data of the projects, through slightly more involved contributions such as setting up CI for the project to atting tests to
     projects.
+    See our <a href="/#stats" class="text-indigo-600 hover:text-indigo-800 underline">Statistics</a>
+  </div>
+
+  <div v-if="currentPage === 'stats' && data">
+    <div class="mb-6 text-lg text-gray-700">Total: <span class="font-semibold">{{data.total}}</span></div>
 
     <div class="bg-white shadow rounded-lg overflow-hidden">
       <table class="min-w-full divide-y divide-gray-200">
@@ -233,7 +237,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="item in homePageItems" :key="item.page" class="hover:bg-gray-50">
+          <tr v-for="item in statsPageItems" :key="item.page" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <a :href="'/#' + item.page" class="text-indigo-600 hover:text-indigo-800 underline">{{item.label}}</a>
             </td>
@@ -249,8 +253,8 @@
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Version Control System (VCS)</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
           Nowadays most developers use some kind of a version control system for their project, usually with a publicly hosted version with read access to everyone.
-          The most commonly used Version Control System is <b>Git</b>. The most popular public Git hosting services are <a href="https://github.com/">GitHub</a>,
-          <a href="https://about.gitlab.com/">GitLab</a>, and <a href="https://bitbucket.org/">BitBucket</a>.
+          The most commonly used Version Control System is <b>Git</b>. The most popular public Git hosting services are <a href="https://github.com/" class="text-indigo-600 hover:text-indigo-800 underline">GitHub</a>,
+          <a href="https://about.gitlab.com/" class="text-indigo-600 hover:text-indigo-800 underline">GitLab</a>, and <a href="https://bitbucket.org/" class="text-indigo-600 hover:text-indigo-800 underline">BitBucket</a>.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
           In order to make it easier to the users of the project, many people include a link to the version control system of the project in the meta-data of the project.
@@ -267,7 +271,7 @@
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">How can you help fixing the situation?</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-          Check the list of packages where we <a href="/#no-vcs">have not found a VCS</a>. First make sure the package indeed does not have a link to its VCS.
+          Check the list of packages where we <a href="/#no-vcs" class="text-indigo-600 hover:text-indigo-800 underline">have not found a VCS</a>. First make sure the package indeed does not have a link to its VCS.
           Our code might have bugs or the package might have been indexed before some of our latest improvements to our indexing.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -298,8 +302,8 @@
         source = "https://github.com/me/spam.git"
         </pre>
         Though it can also be "Repository".<br>
-        See <a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/">Writing your pyproject.toml</a><br>
-        See also the <a href="https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels">well known labels</a>.
+        See <a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" class="text-indigo-600 hover:text-indigo-800 underline">Writing your pyproject.toml</a><br>
+        See also the <a href="https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels" class="text-indigo-600 hover:text-indigo-800 underline">well known labels</a>.
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Suggestions for commit message and PR message</h2>
       <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -321,21 +325,21 @@
         The old PyDigger had a report about missing author field. This new one does not have one <b>yet</b>.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        The Pydigger site monitors the uploads to <a href="https://pypi.org/">PyPI</a> and collects meta-data about the packages.
-        It shows various <a href="/stats">statistics</a> and points you to packages that could be improved by adding some simple meta-data to them.
+        The Pydigger site monitors the uploads to <a href="https://pypi.org/" class="text-indigo-600 hover:text-indigo-800 underline">PyPI</a> and collects meta-data about the packages.
+        It shows various <a href="/stats" class="text-indigo-600 hover:text-indigo-800 underline">statistics</a> and points you to packages that could be improved by adding some simple meta-data to them.
         One of the easiste to fix is the missing <b>author</b> field.
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding Author</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         Each package can have a field called <b>author</b> that contains the name of, well the author. Accourding to our stats about
-        4.6% of the packages <a href="/search/no-author">have not author field</a>. About 1% <a href="/search/has-vcs-no-author">has VCS but no author field</a>
+        4.6% of the packages <a href="/search/no-author" class="text-indigo-600 hover:text-indigo-800 underline">have not author field</a>. About 1% <a href="/search/has-vcs-no-author" class="text-indigo-600 hover:text-indigo-800 underline">has VCS but no author field</a>
         making them very easy to fix. (Locating the missing VCS-es (ak Version Control System) will be the material of another post.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         The most common way to include it in the package is to add a field called <b>author</b> to the <b>setup</b> function in the <b>setup.py</b> of the project.
-        In the video we checked the <a href="https://pydigger.com/pypi/eririn">eririn</a> project to see how it is done
-        and then fixed the <a href="https://pydigger.com/pypi/arduino-udev">arduino-udev</a> project.
-        This is the <a href="https://github.com/strawlab/arduino-udev/pull/4">pull request</a> you can see in the video.
+        In the video we checked the <a href="https://pydigger.com/pypi/eririn" class="text-indigo-600 hover:text-indigo-800 underline">eririn</a> project to see how it is done
+        and then fixed the <a href="https://pydigger.com/pypi/arduino-udev" class="text-indigo-600 hover:text-indigo-800 underline">arduino-udev</a> project.
+        This is the <a href="https://github.com/strawlab/arduino-udev/pull/4" class="text-indigo-600 hover:text-indigo-800 underline">pull request</a> you can see in the video.
         Within a few minutes the Pull-request was accepted.
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">setup.py</h2>
@@ -346,8 +350,8 @@
         </pre>
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        Another project <a href="https://github.com/vangheem/mr.flagly/">mr.flagly</a> was using a <b>pyproject.toml</b> file which is <a href="https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#authors-maintainers">documented here</a>.
-        I sent the <a href="https://github.com/vangheem/mr.flagly/pull/1">pull-request</a> from another account  I was demonstrating it to the <a href="https://osdc.code-maven.com/">OSDC</a> students.
+        Another project <a href="https://github.com/vangheem/mr.flagly/" class="text-indigo-600 hover:text-indigo-800 underline">mr.flagly</a> was using a <b>pyproject.toml</b> file which is <a href="https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#authors-maintainers" class="text-indigo-600 hover:text-indigo-800 underline">documented here</a>.
+        I sent the <a href="https://github.com/vangheem/mr.flagly/pull/1" class="text-indigo-600 hover:text-indigo-800 underline">pull-request</a> from another account  I was demonstrating it to the <a href="https://osdc.code-maven.com/" class="text-indigo-600 hover:text-indigo-800 underline">OSDC</a> students.
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">pyproject.toml</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -361,7 +365,7 @@
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Steps you can take</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         <ul>
-            <li>Visit the <a href="/search/has-vcs-no-author">list of packages that have VCS but no author field</a> and pick one.</li>
+            <li>Visit the <a href="/search/has-vcs-no-author" class="text-indigo-600 hover:text-indigo-800 underline">list of packages that have VCS but no author field</a> and pick one.</li>
             <li>Visit the source code of the package. (Link is on the page of the package)</li>
             <li>In the VCS (Github, GitLab, Bitbucket, etc. look for the name of the author of the package.</li>
             <li>Locate the <b>setup.py</b> in the root of the repository</li>
@@ -375,9 +379,9 @@
   <div v-if="currentPage === 'docs-license' && data">
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding the License field</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        Adding the <b>license</b> is technically very similar to adding the <a href="/#docs-author">author field</a>, but knowing what to write is a bit more challenging.
+        Adding the <b>license</b> is technically very similar to adding the <a href="/#docs-author" class="text-indigo-600 hover:text-indigo-800 underline">author field</a>, but knowing what to write is a bit more challenging.
         You'll have to check what is the real license of the project. Most probably there is a file called "LICENSE" in the root of the project with the full text
-        of the license. Issue <a href="https://github.com/szabgab/pydigger.com/issues/20">#20</a> call for the collection of that information.
+        of the license. Issue <a href="https://github.com/szabgab/pydigger.com/issues/20" class="text-indigo-600 hover:text-indigo-800 underline">#20</a> call for the collection of that information.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         Alternatively you can locate the bug-tracking system of the project (they are usually the same place the version control system can be found) and you can open
@@ -385,7 +389,7 @@
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Shortening the license field</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        We can <a href="/search?license=__long__">list package with long licenses</a> (over 50 character), but we don't have a way to list the ones that also have a VCS.
+        We can <a href="/search?license=__long__" class="text-indigo-600 hover:text-indigo-800 underline">list package with long licenses</a> (over 50 character), but we don't have a way to list the ones that also have a VCS.
         In general it would be better to use a short and standard name for each license. That will make them more comparable.
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">The technical details</h2>
@@ -393,7 +397,7 @@
         The JSON file of each package can have a field called <b>license</b> that contains the short name of the license.
         The most common way to include it in the packages is to add a field called <b>license</b> to the <b>setup</b> function in the <b>setup.py</b> of the project
         or add the same field under <b>[build-system]</b> in <b>pyproject.toml file</b>.
-        Ticket <a href="https://github.com/szabgab/pydigger.com/issues/19">#19</a> futher discusses the issues.
+        Ticket <a href="https://github.com/szabgab/pydigger.com/issues/19" class="text-indigo-600 hover:text-indigo-800 underline">#19</a> futher discusses the issues.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         Here is the section of the setup.py file:
@@ -415,8 +419,8 @@
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">OSI approved licenses</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        One of the goals is to make it easy to check if a package has an <a href="https://opensource.org/licenses">OSI approved license</a> or not. The short names probably should
-        be either the names of URLs of OSI approved licenses or  on the short names should be hosted on <a href="https://pypi.org/">PYPI</a> web site.
+        One of the goals is to make it easy to check if a package has an <a href="https://opensource.org/licenses" class="text-indigo-600 hover:text-indigo-800 underline">OSI approved license</a> or not. The short names probably should
+        be either the names of URLs of OSI approved licenses or  on the short names should be hosted on <a href="https://pypi.org/" class="text-indigo-600 hover:text-indigo-800 underline">PYPI</a> web site.
       </div>
   </div>
 
@@ -425,16 +429,16 @@
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">setup.cfg / setup.py</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         <ul>
-            <li><a href="https://docs.python.org/distutils/setupscript.html">setupscript</a></li>
+            <li><a href="https://docs.python.org/distutils/setupscript.html" class="text-indigo-600 hover:text-indigo-800 underline">setupscript</a></li>
         </ul>
       </div>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">pyproject.toml</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         <ul>
-            <li><a href="https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/">pyproject-toml by pip</a></li>
-            <li><a href="https://peps.python.org/pep-0621/">PEP 621 – Storing project metadata in pyproject.toml</a></li>
-            <li><a href="https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html">Configuring setuptools using pyproject.toml files</a></li>
-            <li><a href="https://python-poetry.org/docs/pyproject/">The pyproject.toml file</a> at Poetry</a></li>
+            <li><a href="https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/" class="text-indigo-600 hover:text-indigo-800 underline">pyproject-toml by pip</a></li>
+            <li><a href="https://peps.python.org/pep-0621/" class="text-indigo-600 hover:text-indigo-800 underline">PEP 621 – Storing project metadata in pyproject.toml</a></li>
+            <li><a href="https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html" class="text-indigo-600 hover:text-indigo-800 underline">Configuring setuptools using pyproject.toml files</a></li>
+            <li><a href="https://python-poetry.org/docs/pyproject/" class="text-indigo-600 hover:text-indigo-800 underline">The pyproject.toml file</a> at Poetry</a></li>
         </ul>
       </div>
   </div>
@@ -442,7 +446,7 @@
   <div v-if="currentPage === 'docs-summary' && data">
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding Summary</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        Adding the <b>summary</b> is technically very similar to adding the <a href="/#docs-author">author field</a>, but knowing what to write is a bit more challenging.
+        Adding the <b>summary</b> is technically very similar to adding the <a href="/#docs-author" class="text-indigo-600 hover:text-indigo-800 underline">author field</a>, but knowing what to write is a bit more challenging.
         You'll have to understand what is the project about and you must be able to write a one-line description.
       </div>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -548,6 +552,7 @@
 
                 const pageTitles = {
                     'home': 'PyDigger',
+                    'stats': 'PyDigger - Stats',
                     'recent': 'PyDigger - Recent',
                     'licenses': 'PyDigger - Licenses',
                     'no-license': 'PyDigger - No License',
@@ -673,7 +678,7 @@
             const licenseSortColumn = ref('license')
             const licenseSortDirection = ref('asc')
 
-            const homePageItems = ref([
+            const statsPageItems = ref([
                 { label: 'No License', page: 'no-license', getValue: (data) => data.license.no_license_count },
                 { label: 'Unrecognized License', page: 'unrecognized-license', getValue: (data) => data.license.bad_license_count },
                 { label: 'Long License', page: 'long-license', getValue: (data) => data.license.long_license_count },
@@ -691,6 +696,7 @@
 
             const menuItems = ref([
                 { label: 'Home', page: 'home' },
+                { label: 'Stats', page: 'stats' },
                 { label: 'Recent', page: 'recent' },
                 {
                     label: 'Licenses',
@@ -734,7 +740,7 @@
             ])
 
             return {
-                data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems, licenseSortColumn, licenseSortDirection, homePageItems
+                data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems, licenseSortColumn, licenseSortDirection, statsPageItems
             }
         }
     }).mount('#app')
