@@ -314,6 +314,64 @@
       </div>
   </div>
 
+  <div v-if="currentPage === 'docs-author' && data">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Author field</h2>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Background</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        The old PyDigger had a report about missing author field. This new one does not have one <b>yet</b>.
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        The Pydigger site monitors the uploads to <a href="https://pypi.org/">PyPI</a> and collects meta-data about the packages.
+        It shows various <a href="/stats">statistics</a> and points you to packages that could be improved by adding some simple meta-data to them.
+        One of the easiste to fix is the missing <b>author</b> field.
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding Author</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Each package can have a field called <b>author</b> that contains the name of, well the author. Accourding to our stats about
+        4.6% of the packages <a href="/search/no-author">have not author field</a>. About 1% <a href="/search/has-vcs-no-author">has VCS but no author field</a>
+        making them very easy to fix. (Locating the missing VCS-es (ak Version Control System) will be the material of another post.
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        The most common way to include it in the package is to add a field called <b>author</b> to the <b>setup</b> function in the <b>setup.py</b> of the project.
+        In the video we checked the <a href="https://pydigger.com/pypi/eririn">eririn</a> project to see how it is done
+        and then fixed the <a href="https://pydigger.com/pypi/arduino-udev">arduino-udev</a> project.
+        This is the <a href="https://github.com/strawlab/arduino-udev/pull/4">pull request</a> you can see in the video.
+        Within a few minutes the Pull-request was accepted.
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">setup.py</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Here is the section of the setup.py file:
+        <pre>
+            author="Foo Bar",
+        </pre>
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Another project <a href="https://github.com/vangheem/mr.flagly/">mr.flagly</a> was using a <b>pyproject.toml</b> file which is <a href="https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#authors-maintainers">documented here</a>.
+        I sent the <a href="https://github.com/vangheem/mr.flagly/pull/1">pull-request</a> from another account  I was demonstrating it to the <a href="https://osdc.code-maven.com/">OSDC</a> students.
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">pyproject.toml</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Here is the section of the pyproject.toml files:
+        <pre>
+        authors = [
+            { name="Foo Bar", email="foo@bar.com" },
+        ]
+        </pre>
+     </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Steps you can take</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        <ul>
+            <li>Visit the <a href="/search/has-vcs-no-author">list of packages that have VCS but no author field</a> and pick one.</li>
+            <li>Visit the source code of the package. (Link is on the page of the package)</li>
+            <li>In the VCS (Github, GitLab, Bitbucket, etc. look for the name of the author of the package.</li>
+            <li>Locate the <b>setup.py</b> in the root of the repository</li>
+            <li>Edit the file and add the <b>author</b> field.</li>
+            <li>Save it. (This creates a commit)</li>
+            <li>Send a Pull-Request</li>
+        </ul>
+      </div>
+  </div>
+
   <div v-if="currentPage.startsWith('pypi/') && projectData" class="bg-white shadow rounded-lg p-6">
     <h2 class="text-3xl font-bold text-gray-900 mb-6">{{projectData.name}} <span class="text-xl text-gray-500">{{projectData.version}}</span></h2>
     <div class="space-y-3">
@@ -412,6 +470,7 @@
                     'no-github-actions': 'PyDigger - No GitHub Actions',
                     'has-gitlab-pipeline': 'PyDigger - Has GitLab Pipeline',
                     'no-gitlab-pipeline': 'PyDigger - No GitLab Pipeline',
+                    'docs-author': 'PyDigger - Author',
                     'docs-vcs': 'PyDigger - Version Control System (VCS)',
                     'about': 'PyDigger - About'
                 }
@@ -569,7 +628,8 @@
                     label: 'Docs',
                     open: false,
                     submenu: [
-                        { label: 'VCS', page: 'docs-vcs' }
+                        { label: 'VCS', page: 'docs-vcs' },
+                        { label: 'Author', page: 'docs-author' }
                     ]
                 },
                 { label: 'About', page: 'about' }
