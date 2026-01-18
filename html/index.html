@@ -372,6 +372,54 @@
       </div>
   </div>
 
+  <div v-if="currentPage === 'docs-license' && data">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding the License field</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Adding the <b>license</b> is technically very similar to adding the <a href="/#docs-author">author field</a>, but knowing what to write is a bit more challenging.
+        You'll have to check what is the real license of the project. Most probably there is a file called "LICENSE" in the root of the project with the full text
+        of the license. Issue <a href="https://github.com/szabgab/pydigger.com/issues/20">#20</a> call for the collection of that information.
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Alternatively you can locate the bug-tracking system of the project (they are usually the same place the version control system can be found) and you can open
+        a ticket or issue depending the word the particular system uses.
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Shortening the license field</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        We can <a href="/search?license=__long__">list package with long licenses</a> (over 50 character), but we don't have a way to list the ones that also have a VCS.
+        In general it would be better to use a short and standard name for each license. That will make them more comparable.
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">The technical details</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        The JSON file of each package can have a field called <b>license</b> that contains the short name of the license.
+        The most common way to include it in the packages is to add a field called <b>license</b> to the <b>setup</b> function in the <b>setup.py</b> of the project
+        or add the same field under <b>[build-system]</b> in <b>pyproject.toml file</b>.
+        Ticket <a href="https://github.com/szabgab/pydigger.com/issues/19">#19</a> futher discusses the issues.
+      </div>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        Here is the section of the setup.py file:
+        <pre>
+          setuptools.setup(
+          name="name of the project",
+          version="1.1.7",
+          author="Foo Bar",
+          author_email="Foo.Bar.contact@Foo.com",
+          <b>license="MIT"</b>
+        </pre>
+        Here is the section of the pyproject.toml file:
+        <pre>
+          [build-system]
+          requires = ["poetry>=0.12"]
+          build-backend = "poetry.masonry.api"
+          <b>license = "Apache-2.0"</b>
+        </pre>
+      </div>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">OSI approved licenses</h2>
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        One of the goals is to make it easy to check if a package has an <a href="https://opensource.org/licenses">OSI approved license</a> or not. The short names probably should
+        be either the names of URLs of OSI approved licenses or  on the short names should be hosted on <a href="https://pypi.org/">PYPI</a> web site.
+      </div>
+  </div>
+
   <div v-if="currentPage === 'docs-summary' && data">
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Adding Summary</h2>
       <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -496,6 +544,7 @@
                     'has-gitlab-pipeline': 'PyDigger - Has GitLab Pipeline',
                     'no-gitlab-pipeline': 'PyDigger - No GitLab Pipeline',
                     'docs-author': 'PyDigger - Author',
+                    'docs-license': 'PyDigger - License',
                     'docs-summary': 'PyDigger - Summary',
                     'docs-vcs': 'PyDigger - Version Control System (VCS)',
                     'about': 'PyDigger - About'
@@ -656,6 +705,7 @@
                     submenu: [
                         { label: 'VCS', page: 'docs-vcs' },
                         { label: 'Author', page: 'docs-author' },
+                        { label: 'License', page: 'docs-license' },
                         { label: 'Summary', page: 'docs-summary' }
                     ]
                 },
