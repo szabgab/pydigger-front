@@ -122,6 +122,40 @@
   </div>
   </div>
 
+  <div v-if="currentPage === 'urls' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-6">Project URLs</h2>
+  <div class="bg-white shadow rounded-lg overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th @click="sortUrls('key')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none">
+            URL Type
+            <span v-if="urlsSortColumn === 'key'" class="ml-1">
+              <span v-if="urlsSortDirection === 'asc'">▲</span>
+              <span v-else>▼</span>
+            </span>
+          </th>
+          <th @click="sortUrls('count')" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none">
+            Count
+            <span v-if="urlsSortColumn === 'count'" class="ml-1">
+              <span v-if="urlsSortDirection === 'asc'">▲</span>
+              <span v-else>▼</span>
+            </span>
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr v-for="item in sortedUrls" class="hover:bg-gray-50">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{item.key}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{item.count}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{((item.count / data.total) * 100).toFixed(2)}}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
   <div v-if="currentPage === 'no-license' && data">
   <h2 class="text-2xl font-semibold text-gray-900 mb-4">No License</h2>
   <div class="mb-6 text-gray-700">No License: <span class="font-semibold">{{data.license.no_license_count}}</span></div>
@@ -558,6 +592,7 @@
                     'no-license': 'PyDigger - No License',
                     'unrecognized-license': 'PyDigger - Unrecognized License',
                     'long-license': 'PyDigger - Long License',
+                    'urls': 'PyDigger - Project URLs',
                     'vcs': 'PyDigger - VCS',
                     'no-vcs': 'PyDigger - No VCS',
                     'unrecognized-vcs': 'PyDigger - Unrecognized VCS',
@@ -576,6 +611,34 @@
                 }
 
                 return pageTitles[this.currentPage] || 'PyDigger'
+            },
+            sortedUrls() {
+                if (!this.data || !this.data.project_urls_count) {
+                    return []
+                }
+                const urlsArray = Object.entries(this.data.project_urls_count).map(([key, count]) => ({
+                    key,
+                    count
+                }))
+
+                return urlsArray.sort((a, b) => {
+                    let compareA = a[this.urlsSortColumn]
+                    let compareB = b[this.urlsSortColumn]
+
+                    if (this.urlsSortColumn === 'count') {
+                        compareA = Number(compareA)
+                        compareB = Number(compareB)
+                    } else {
+                        compareA = String(compareA).toLowerCase()
+                        compareB = String(compareB).toLowerCase()
+                    }
+
+                    if (this.urlsSortDirection === 'asc') {
+                        return compareA < compareB ? -1 : compareA > compareB ? 1 : 0
+                    } else {
+                        return compareA > compareB ? -1 : compareA < compareB ? 1 : 0
+                    }
+                })
             },
             sortedLicenses() {
                 if (!this.data || !this.data.license || !this.data.license.licenses) {
@@ -618,6 +681,14 @@
             }
         },
         methods: {
+            sortUrls(column) {
+                if (this.urlsSortColumn === column) {
+                    this.urlsSortDirection = this.urlsSortDirection === 'asc' ? 'desc' : 'asc'
+                } else {
+                    this.urlsSortColumn = column
+                    this.urlsSortDirection = 'asc'
+                }
+            },
             sortLicenses(column) {
                 if (this.licenseSortColumn === column) {
                     this.licenseSortDirection = this.licenseSortDirection === 'asc' ? 'desc' : 'asc'
@@ -677,6 +748,8 @@
             const mobileMenuOpen = ref(false)
             const licenseSortColumn = ref('license')
             const licenseSortDirection = ref('asc')
+            const urlsSortColumn = ref('key')
+            const urlsSortDirection = ref('desc')
 
             const statsPageItems = ref([
                 { label: 'No License', page: 'no-license', getValue: (data) => data.license.no_license_count },
@@ -708,6 +781,7 @@
                         { label: 'Long License', page: 'long-license' }
                     ]
                 },
+                { label: 'URLs', page: 'urls' },
                 {
                     label: 'VCS',
                     open: false,
@@ -740,7 +814,7 @@
             ])
 
             return {
-                data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems, licenseSortColumn, licenseSortDirection, statsPageItems
+                data, pypi, currentPage, projectData, projectError, mobileMenuOpen, menuItems, licenseSortColumn, licenseSortDirection, urlsSortColumn, urlsSortDirection, statsPageItems
             }
         }
     }).mount('#app')
