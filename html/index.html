@@ -254,6 +254,12 @@
   <project-list :projects="data.vcs.no_gitlab_pipeline"></project-list>
   </div>
 
+  <div v-if="currentPage === 'has-setup-cfg' && data">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Has setup.cfg</h2>
+  <div class="mb-6 text-gray-700">Total: <span class="font-semibold">{{data.vcs.has_setup_cfg_count}}</span></div>
+  <project-list :projects="data.has_setup_cfg"></project-list>
+  </div>
+
   <div v-if="currentPage === 'home' && data">
     The goal is to improve the Python ecosystem step-by-step starting with really small contributions such as updating some of the
     meta-data of the projects, through slightly more involved contributions such as setting up CI for the project to atting tests to
@@ -605,6 +611,7 @@
                     'no-github-actions': 'PyDigger - No GitHub Actions',
                     'has-gitlab-pipeline': 'PyDigger - Has GitLab Pipeline',
                     'no-gitlab-pipeline': 'PyDigger - No GitLab Pipeline',
+                    'has-setup-cfg': 'PyDigger - Has setup.cfg',
                     'docs-author': 'PyDigger - Author',
                     'docs-license': 'PyDigger - License',
                     'docs-packaging': 'PyDigger - Packaging',
@@ -767,7 +774,8 @@
                 { label: 'Has Dependabot', page: 'has-dependabot', getValue: (data) => data.vcs.has_dependabot_count },
                 { label: 'No Dependabot', page: 'no-dependabot', getValue: (data) => data.vcs.no_dependabot_count },
                 { label: 'Has GitLab pipeline', page: 'has-gitlab-pipeline', getValue: (data) => data.vcs.has_gitlab_pipeline_count },
-                { label: 'No GitLab pipeline', page: 'no-gitlab-pipeline', getValue: (data) => data.vcs.no_gitlab_pipeline_count }
+                { label: 'No GitLab pipeline', page: 'no-gitlab-pipeline', getValue: (data) => data.vcs.no_gitlab_pipeline_count },
+                { label: 'Has setup.cfg', page: 'has-setup-cfg', getValue: (data) => data.vcs.has_setup_cfg_count }
             ])
 
             const menuItems = ref([
@@ -799,7 +807,8 @@
                         { label: 'Has Dependabot', page: 'has-dependabot' },
                         { label: 'No Dependabot', page: 'no-dependabot' },
                         { label: 'Has GitLab Pipeline', page: 'has-gitlab-pipeline' },
-                        { label: 'No GitLab Pipeline', page: 'no-gitlab-pipeline' }
+                        { label: 'No GitLab Pipeline', page: 'no-gitlab-pipeline' },
+                        { label: 'Has setup.cfg', page: 'has-setup-cfg' }
                     ]
                 },
                 {
